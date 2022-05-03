@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:real_estate_app/constants/constants.dart';
 import 'package:real_estate_app/screens/Login/composants/text_field_container.dart';
 
-class RoundedInputField extends StatelessWidget {
+class RoundedInputField extends StatefulWidget {
   final String hintText;
   final IconData icon;
   final ValueChanged<String> onChanged;
@@ -11,20 +11,26 @@ class RoundedInputField extends StatelessWidget {
     this.hintText,
     this.icon = Icons.person,
     this.onChanged,
-  }) : super(key: key);
+    AutovalidateMode autovalidateMode,
+  });
 
+  @override
+  State<RoundedInputField> createState() => _RoundedInputFieldState();
+}
+
+class _RoundedInputFieldState extends State<RoundedInputField> {
   @override
   Widget build(BuildContext context) {
     return TextFieldContainer(
-      child: TextField(
-        onChanged: onChanged,
+      child: TextFormField(
+        onChanged: widget.onChanged,
         cursorColor: kPrimaryColor,
         decoration: InputDecoration(
           icon: Icon(
-            icon,
+            widget.icon,
             color: kPrimaryColor,
           ),
-          hintText: hintText,
+          hintText: widget.hintText,
           border: InputBorder.none,
         ),
       ),
