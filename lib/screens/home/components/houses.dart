@@ -109,7 +109,7 @@ class _HousesState extends State<Houses> {
                     ),
                   ),
                   Text(
-                    '${house.sqFeet} sqft',
+                    '${house.sqFeet} metre',
                     style: TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w600,

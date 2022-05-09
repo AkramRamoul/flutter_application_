@@ -18,7 +18,7 @@ class HomeScreen extends StatelessWidget {
               Houses(),
             ],
           ),
-          BottomButtons(),
+          // BottomButtons(),
         ],
       ),
     );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:real_estate_app/constants/constants.dart';
+import 'package:real_estate_app/screens/profilepage.dart';
 
 class CustomAppBar extends StatelessWidget {
   @override
@@ -27,7 +28,10 @@ class CustomAppBar extends StatelessWidget {
                   decoration: BoxDecoration(
                       border: Border.all(color: black.withOpacity(0.4)),
                       borderRadius: BorderRadius.circular(15)),
-                  child: Icon(Icons.sort_rounded),
+                  child: Icon(
+                    Icons.search,
+                    color: Colors.black,
+                  ),
                 ),
                 Container(
                   height: 50,
@@ -36,25 +40,32 @@ class CustomAppBar extends StatelessWidget {
                       border: Border.all(color: black.withOpacity(0.4)),
                       borderRadius: BorderRadius.circular(15)),
                   child: IconButton(
-                      onPressed: () {}, icon: Icon(Icons.person_rounded)),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return UserProfilePage();
+                          },
+                        ),
+                      );
+                    },
+                    icon: Icon(
+                      Icons.person_rounded,
+                      color: Colors.black,
+                    ),
+                  ),
                 ),
               ],
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'Location',
-                  style: TextStyle(
-                    color: black.withOpacity(0.4),
-                    fontSize: 18,
-                  ),
-                ),
                 SizedBox(
                   height: size.height * 0.01,
                 ),
                 Text(
-                  'Constantine',
+                  'Find Your Home',
                   style: TextStyle(
                       color: black, fontSize: 36, fontWeight: FontWeight.bold),
                 ),

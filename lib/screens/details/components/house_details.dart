@@ -52,13 +52,6 @@ class _HouseDetailsState extends State<HouseDetails> {
                     ),
                   ],
                 ),
-                Text(
-                  '${widget.house.time} hours ago',
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
               ],
             ),
           ),
@@ -106,7 +99,7 @@ class _HouseDetailsState extends State<HouseDetails> {
                           height: 10,
                         ),
                         Text(
-                          'Square foot',
+                          'metres',
                           style: TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.w600,
@@ -235,13 +228,6 @@ class _HouseDetailsState extends State<HouseDetails> {
               left: appPadding,
               right: appPadding,
               bottom: appPadding * 4,
-            ),
-            child: Text(
-              widget.house.description,
-              style: TextStyle(
-                color: black.withOpacity(0.4),
-                height: 1.5,
-              ),
             ),
           )
         ],

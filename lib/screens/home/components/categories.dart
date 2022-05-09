@@ -11,7 +11,6 @@ class _CategoriesState extends State<Categories> {
   int selectedCategoryIndex = 0;
 
   Widget _buildCategory(BuildContext context, int index) {
-
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -23,16 +22,17 @@ class _CategoriesState extends State<Categories> {
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: appPadding / 2),
           decoration: BoxDecoration(
-              color: selectedCategoryIndex == index
-                  ? darkBlue
-                  : black.withOpacity(0.1),
-              borderRadius: BorderRadius.circular(20),),
+            color: selectedCategoryIndex == index
+                ? darkBlue
+                : black.withOpacity(0.1),
+            borderRadius: BorderRadius.circular(20),
+          ),
           child: Center(
             child: Text(
-              categoryList[index],style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: selectedCategoryIndex == index ? white : black
-            ),
+              categoryList[index],
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: selectedCategoryIndex == index ? white : black),
             ),
           ),
         ),
@@ -47,8 +47,8 @@ class _CategoriesState extends State<Categories> {
     return Padding(
       padding: const EdgeInsets.only(
         left: appPadding,
-        top: appPadding / 2,
-        bottom: appPadding,
+        top: appPadding / 5,
+        bottom: appPadding / 5,
       ),
       child: Container(
         height: size.height * 0.05,

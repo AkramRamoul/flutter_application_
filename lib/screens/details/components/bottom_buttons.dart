@@ -26,9 +26,10 @@ class BottomButtons extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(
-                  (Icons.mail_rounded),
+                IconButton(
+                  icon: Icon(Icons.mail_rounded),
                   color: white,
+                  onPressed: () {},
                 ),
                 Text(
                   ' Message',
@@ -56,9 +57,10 @@ class BottomButtons extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(
-                  (Icons.call_rounded),
+                IconButton(
+                  icon: Icon(Icons.call_rounded),
                   color: white,
+                  onPressed: () {},
                 ),
                 Text(
                   ' Call',

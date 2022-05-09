@@ -56,7 +56,11 @@ class _BodyState extends State<Body> {
             RoundedButton(
               text: "LOGIN",
               press: () {
-                _login();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => HomeScreen()),
+                );
+                // _login();
               },
             ),
             SizedBox(height: size.height * 0.03),
@@ -78,48 +82,48 @@ class _BodyState extends State<Body> {
     );
   }
 
-  _showMsg(msg) {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Text(msg),
-      action: SnackBarAction(
-        label: 'Close',
-        onPressed: () {
-          // Some code to undo the change!
-        },
-      ),
-    ));
-  }
+  // _showMsg(msg) {
+  //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+  //     content: Text(msg),
+  //     action: SnackBarAction(
+  //       label: 'Close',
+  //       onPressed: () {
+  //         // Some code to undo the change!
+  //       },
+  //     ),
+  //   ));
+  // }
 
-  void _login() async {
-    setState(() {
-      _isLoading = true;
-    });
-    var data = {'email': email, 'password': password};
+  // void _login() async {
+  //   setState(() {
+  //     _isLoading = true;
+  //   });
+  //   var data = {'email': email, 'password': password};
 
-    var map = new Map<String, dynamic>();
-    map['email'] = email;
-    map['password'] = password;
-    var response = await Api().postData(data, '/login');
+  //   var map = new Map<String, dynamic>();
+  //   map['email'] = email;
+  //   map['password'] = password;
+  //   var response = await Api().postData(data, '/login');
 
-    if (response.statusCode == 200) {
-      var body = json.decode(response.body);
-      _showMsg(response.body);
+  //   if (response.statusCode == 200) {
+  //     var body = json.decode(response.body);
+  //     _showMsg(response.body);
 
-      SharedPreferences localStorage = await SharedPreferences.getInstance();
-      localStorage.setString('token', json.encode(body['token']));
-      localStorage.setString('user', json.encode(body['user']));
-      Navigator.push(
-        context,
-        new MaterialPageRoute(builder: (context) => HomeScreen()),
-      );
-      _showMsg(body['message']);
-      Navigator.pop(context);
-    } else {
-      _showMsg('Error ${response.statusCode}');
-    }
+  //     SharedPreferences localStorage = await SharedPreferences.getInstance();
+  //     localStorage.setString('token', json.encode(body['token']));
+  //     localStorage.setString('user', json.encode(body['user']));
+  //     Navigator.push(
+  //       context,
+  //       new MaterialPageRoute(builder: (context) => HomeScreen()),
+  //     );
+  //     _showMsg(body['message']);
+  //     Navigator.pop(context);
+  //   } else {
+  //     _showMsg('Error ${response.statusCode}');
+  //   }
 
-    setState(() {
-      _isLoading = false;
-    });
-  }
+  //   setState(() {
+  //     _isLoading = false;
+  //   });
+  // }
 }
