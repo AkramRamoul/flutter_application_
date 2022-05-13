@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:real_estate_app/constants/constants.dart';
-import 'package:real_estate_app/screens/Login/ecrans/Welcome/welcome_screen.dart';
+import 'package:real_estate_app/client/constants/constants.dart';
+import 'package:real_estate_app/client/screens/Login/ecrans/Welcome/welcome_screen.dart';
 
 void main() {
   runApp(MyApp());
