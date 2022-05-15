@@ -4,33 +4,16 @@ import 'package:real_estate_app/agency/screens/AddOfferView.dart';
 import 'package:real_estate_app/agency/screens/OffersListView.dart';
 import 'package:real_estate_app/client/screens/profilepage.dart';
 
-void main() {
-  runApp(Agency_main());
-}
-
-class Agency_main extends StatelessWidget {
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'My House',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(primarySwatch: Colors.deepPurple),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+class Agencymain extends StatefulWidget {
+  Agencymain({Key key, this.title}) : super(key: key);
 
   final String title;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _AgencymainState createState() => _AgencymainState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _AgencymainState extends State<Agencymain> {
   int _counter = 0;
 
   void _incrementCounter() {
