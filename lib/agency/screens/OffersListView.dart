@@ -49,6 +49,7 @@ class _OffersListState extends State<OffersListView> {
             style: TextStyle(color: Colors.black54)),
         subtitle: Text(_offers[index]['price'].toString(),
             style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+        onTap: () {},
       ),
     );
   }

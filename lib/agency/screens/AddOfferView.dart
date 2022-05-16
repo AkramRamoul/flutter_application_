@@ -119,12 +119,9 @@ class _AddOfferState extends State<AddOfferView> {
     if (_image == null) {
       return Padding(
         padding: const EdgeInsets.fromLTRB(1, 1, 1, 1),
-        child: IconButton(
-          icon: Icon(
-            Icons.add,
-            color: Colors.grey,
-          ),
-          onPressed: () {},
+        child: Icon(
+          Icons.add,
+          color: Colors.grey,
         ),
       );
     } else {
@@ -166,10 +163,10 @@ class _AddOfferState extends State<AddOfferView> {
     data['price'] = price;
     //data['user_id'] = user_id.toString();
     data['category_id'] = category_id.toString();
-    data['image'] = _image.path;
+    // data['image'] = _image.path;
 
-    var response = await Api().postDataWithImage(data, '/offers', _image.path);
-    //var response = await Api().postData(data, '/offer');
+    // var response = await Api().postDataWithImage(data, '/offers', _image.path);
+    var response = await Api().postData(data, '/offer');
 
     if (response.statusCode == 201) {
       Navigator.pop(context);

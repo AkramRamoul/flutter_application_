@@ -95,7 +95,7 @@ class _BodyState extends State<Body> {
     var map = new Map<String, dynamic>();
     map['email'] = email;
     map['password'] = password;
-    var response = await Api().postData(data, '/signup');
+    var response = await Api().postData(data, '/register');
 
     if (response.statusCode == 200) {
       var body = json.decode(response.body);
