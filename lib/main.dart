@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:real_estate_app/agency/agency_main_screen.dart';
+import 'package:real_estate_app/agency/screens/LoginPage.dart';
 import 'package:real_estate_app/client/constants/constants.dart';
-import 'package:real_estate_app/login/loading.dart';
+import 'package:real_estate_app/client/screens/home/home_screen.dart';
+import 'package:real_estate_app/firstscreen/FIRSTSCREEN.dart';
 
 void main() {
   runApp(MyApp());
@@ -17,7 +20,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
           scaffoldBackgroundColor: white),
-      home: Loading(),
+      home: WelcomeScreen(),
     );
   }
 }

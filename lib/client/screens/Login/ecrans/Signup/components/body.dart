@@ -5,11 +5,22 @@ import 'package:real_estate_app/client/screens/Login/composants/rounded_input_fi
 import 'package:real_estate_app/client/screens/Login/composants/rounded_password_field.dart';
 import 'package:real_estate_app/client/screens/Login/ecrans/Login/login_screen.dart';
 import 'package:real_estate_app/client/screens/Login/ecrans/Signup/components/background.dart';
-import 'package:real_estate_app/client/screens/Login/ecrans/Signup/components/or_divider.dart';
-import 'package:real_estate_app/client/screens/Login/ecrans/Signup/components/social_icon.dart';
+import 'package:real_estate_app/client/screens/home/home_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class Body extends StatelessWidget {
+import 'dart:convert';
+import 'package:real_estate_app/helpers/Api.dart';
+
+class Body extends StatefulWidget {
   @override
+  State<Body> createState() => _BodyState();
+}
+
+class _BodyState extends State<Body> {
+  @override
+  var email;
+  var password;
+  bool _isLoading = true;
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Background(
@@ -27,19 +38,21 @@ class Body extends StatelessWidget {
               height: size.height * 0.35,
             ),
             RoundedInputField(
-              hintText: "Your Name",
-              onChanged: (value) {},
-            ),
-            RoundedInputField(
               hintText: "Your Email",
-              onChanged: (value) {},
+              onChanged: (value) {
+                email = value;
+              },
             ),
             RoundedPasswordField(
-              onChanged: (value) {},
+              onChanged: (value) {
+                password = value;
+              },
             ),
             RoundedButton(
               text: "SIGNUP",
-              press: () {},
+              press: () {
+                _signup();
+              },
             ),
             SizedBox(height: size.height * 0.03),
             AlreadyHaveAnAccountCheck(
@@ -55,27 +68,54 @@ class Body extends StatelessWidget {
                 );
               },
             ),
-            // OrDivider(),
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.center,
-            //   children: <Widget>[
-            //     SocalIcon(
-            //       iconSrc: "assets/icons/facebook.svg",
-            //       press: () {},
-            //     ),
-            //     SocalIcon(
-            //       iconSrc: "assets/icons/twitter.svg",
-            //       press: () {},
-            //     ),
-            //     SocalIcon(
-            //       iconSrc: "assets/icons/google-plus.svg",
-            //       press: () {},
-            //     ),
-            //   ],
-            // )
           ],
         ),
       ),
     );
+  }
+
+  _showMsg(msg) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text(msg),
+      action: SnackBarAction(
+        label: 'Close',
+        onPressed: () {
+          // Some code to undo the change!
+        },
+      ),
+    ));
+  }
+
+  void _signup() async {
+    setState(() {
+      _isLoading = true;
+    });
+    var data = {'email': email, 'password': password};
+
+    var map = new Map<String, dynamic>();
+    map['email'] = email;
+    map['password'] = password;
+    var response = await Api().postData(data, '/signup');
+
+    if (response.statusCode == 200) {
+      var body = json.decode(response.body);
+      _showMsg(response.body);
+
+      SharedPreferences localStorage = await SharedPreferences.getInstance();
+      localStorage.setString('token', json.encode(body['token']));
+      localStorage.setString('user', json.encode(body['user']));
+      Navigator.push(
+        context,
+        new MaterialPageRoute(builder: (context) => HomeScreen()),
+      );
+      _showMsg(body['message']);
+      Navigator.pop(context);
+    } else {
+      _showMsg('Error ${response.statusCode}');
+    }
+
+    setState(() {
+      _isLoading = false;
+    });
   }
 }

@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:real_estate_app/agency/agency_main_screen.dart';
 import 'package:real_estate_app/client/constants/constants.dart';
+import 'package:real_estate_app/client/screens/home/home_screen.dart';
 import 'package:real_estate_app/helpers/Api.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -25,12 +25,6 @@ class _LoginPageState extends State<LoginPage> {
   Widget _buildLoginLayout() {
     return Stack(
       children: <Widget>[
-        Align(
-            child: Text(
-              'LOGIN',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
-            ),
-            alignment: Alignment.center),
         Align(
           alignment: Alignment.topCenter,
           child: AppLogo(),
@@ -73,6 +67,7 @@ class _LoginPageState extends State<LoginPage> {
     return TextFormField(
       cursorColor: kPrimaryColor,
       decoration: InputDecoration(
+        labelText: 'Email',
         hintText: 'Email',
         icon: Icon(
           Icons.person,
@@ -95,6 +90,7 @@ class _LoginPageState extends State<LoginPage> {
     return TextFormField(
       obscureText: true,
       decoration: InputDecoration(
+        labelText: 'Password',
         hintText: "Password",
         icon: Icon(
           Icons.lock,
@@ -174,7 +170,7 @@ class _LoginPageState extends State<LoginPage> {
       localStorage.setString('user', json.encode(body['user']));
       Navigator.push(
         context,
-        new MaterialPageRoute(builder: (context) => Agencymain()),
+        new MaterialPageRoute(builder: (context) => HomeScreen()),
       );
       _showMsg(body['message']);
       Navigator.pop(context);

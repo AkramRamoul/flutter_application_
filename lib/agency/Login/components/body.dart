@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:real_estate_app/agency/agency_main_screen.dart';
 import 'package:real_estate_app/helpers/Api.dart';
 import 'package:flutter/material.dart';
 import 'package:real_estate_app/client/screens/Login/composants/already_have_an_account_acheck.dart';
@@ -99,7 +100,7 @@ class _BodyState extends State<Body> {
     var map = new Map<String, dynamic>();
     map['email'] = email;
     map['password'] = password;
-    var response = await Api().postData(data, '/login');
+    var response = await Api().postData(data, '/signin');
 
     if (response.statusCode == 200) {
       var body = json.decode(response.body);
@@ -110,7 +111,7 @@ class _BodyState extends State<Body> {
       localStorage.setString('user', json.encode(body['user']));
       Navigator.push(
         context,
-        new MaterialPageRoute(builder: (context) => HomeScreen()),
+        new MaterialPageRoute(builder: (context) => Agencymain()),
       );
       _showMsg(body['message']);
       Navigator.pop(context);
