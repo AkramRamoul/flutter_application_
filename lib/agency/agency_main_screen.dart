@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:real_estate_app/agency/profilepage.dart';
 import 'package:real_estate_app/agency/screens/AddOfferView.dart';
 import 'package:real_estate_app/agency/screens/OffersListView.dart';
-import 'package:real_estate_app/Agency/screens/profilepage.dart';
 
 class Agencymain extends StatefulWidget {
   Agencymain({Key key, this.title}) : super(key: key);
@@ -72,7 +72,7 @@ class _AgencymainState extends State<Agencymain> {
                   child: OffersListView(),
                 ),
                 Container(
-                  child: UserProfilePage(),
+                  child: AgencyProfilePage(),
                 )
               ],
             )),

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'dart:convert';
+
 import 'package:real_estate_app/client/constants/constants.dart';
 import 'package:real_estate_app/client/model/house.dart';
+import 'package:real_estate_app/helpers/Api.dart';
 
 class HouseDetails extends StatefulWidget {
   final House house;
@@ -13,6 +16,14 @@ class HouseDetails extends StatefulWidget {
 
 class _HouseDetailsState extends State<HouseDetails> {
   @override
+  var _offers = [];
+  bool isFav = false;
+  @override
+  void initState() {
+    super.initState();
+    _loadOffers();
+  }
+
   Widget build(BuildContext context) {
     return Expanded(
       child: ListView(
@@ -232,5 +243,19 @@ class _HouseDetailsState extends State<HouseDetails> {
         ],
       ),
     );
+  }
+
+  _loadOffers() async {
+    var response = await Api().getData('/offer');
+    if (response.statusCode == 200) {
+      setState(() {
+        print(response.body);
+        _offers = json.decode(response.body);
+      });
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text('Error ' + response.statusCode + ': ' + response.body),
+      ));
+    }
   }
 }

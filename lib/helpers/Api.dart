@@ -21,7 +21,7 @@ class Api {
 
   postDataWithImage(data, apiUrl, filepath) async {
     var fullUrl = _baseUrl + apiUrl;
-    //token = await SharedPreferencesManager().getAuthToken();
+    token = await SharedPreferencesManager().getAuthToken();
     Map<String, String> headers = {
       'Content-Type': 'multipart/form-data',
       'Accept': 'application/json',
@@ -35,7 +35,7 @@ class Api {
   }
 
   String getOfferImageUrl(id) {
-    return _baseUrl + '/images/meal/$id';
+    return _baseUrl + '/images/offer/$id';
   }
 
   _setHeaders() => {

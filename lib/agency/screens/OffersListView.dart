@@ -58,6 +58,7 @@ class _OffersListState extends State<OffersListView> {
     var response = await Api().getData('/offer');
     if (response.statusCode == 200) {
       setState(() {
+        print(response.body);
         _offers = json.decode(response.body);
       });
     } else {

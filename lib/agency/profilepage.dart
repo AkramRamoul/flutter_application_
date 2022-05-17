@@ -1,17 +1,36 @@
 import 'package:flutter/material.dart';
-import 'package:real_estate_app/agency/agency_main_screen.dart';
+import 'package:real_estate_app/client/screens/home/home_screen.dart';
 
-class UserProfilePage extends StatefulWidget {
+class AgencyProfilePage extends StatefulWidget {
   @override
-  State<UserProfilePage> createState() => _UserProfilePageState();
+  State<AgencyProfilePage> createState() => _AgencyProfilePageState();
 }
 
-class _UserProfilePageState extends State<UserProfilePage> {
+class _AgencyProfilePageState extends State<AgencyProfilePage> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 1,
       child: Scaffold(
+        appBar: AppBar(
+          title: Text(' Name', style: TextStyle(color: Colors.black)),
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            color: Colors.black,
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return HomeScreen();
+                  },
+                ),
+              );
+            },
+          ),
+        ),
         backgroundColor: Colors.white,
         body: Column(
           children: [

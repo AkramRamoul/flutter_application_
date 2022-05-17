@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:picker/picker.dart';
+// import 'package:picker/picker.dart';
 import 'package:real_estate_app/helpers/Api.dart';
 
 class AddOfferView extends StatefulWidget {
@@ -20,13 +20,15 @@ class _AddOfferState extends State<AddOfferView> {
   var user_id = 1;
   var title;
   var price;
+  var bedrooms;
+  var bathrooms;
   String category_id = "2";
   var categories = [];
   //   {'id': 1, 'name': 'category 1'},
   //   {'id': 2, 'name': 'category 2'}
   // ];
 
-  File _image;
+  // File _image;
   //final picker = imagepic;
 
   @override
@@ -58,9 +60,26 @@ class _AddOfferState extends State<AddOfferView> {
             ),
             TextFormField(
               keyboardType: TextInputType.number,
-              decoration: InputDecoration(labelText: 'Price'),
+              decoration: InputDecoration(
+                  icon: Icon(Icons.attach_money_outlined), labelText: 'Price'),
               onChanged: (value) {
                 price = value;
+              },
+            ),
+            TextFormField(
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                  icon: Icon(Icons.bathroom_outlined), labelText: 'bedrooms'),
+              onChanged: (value) {
+                bedrooms = value;
+              },
+            ),
+            TextFormField(
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                  icon: Icon(Icons.bathroom_outlined), labelText: 'bathrooms'),
+              onChanged: (value) {
+                bathrooms = value;
               },
             ),
             DropdownButton(
@@ -78,7 +97,7 @@ class _AddOfferState extends State<AddOfferView> {
               },
               value: category_id,
             ),
-            OutlinedButton(onPressed: getImage, child: _buildImage()),
+            // OutlinedButton(onPressed: getImage, child: _buildImage()),
             SizedBox(
               height: 20.0,
             ),
@@ -115,30 +134,30 @@ class _AddOfferState extends State<AddOfferView> {
   //   style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blue),
   // );
   // }
-  Widget _buildImage() {
-    if (_image == null) {
-      return Padding(
-        padding: const EdgeInsets.fromLTRB(1, 1, 1, 1),
-        child: Icon(
-          Icons.add,
-          color: Colors.grey,
-        ),
-      );
-    } else {
-      return Image.file(File(_image.path));
-    }
-  }
+  // Widget _buildImage() {
+  //   if (_image == null) {
+  //     return Padding(
+  //       padding: const EdgeInsets.fromLTRB(1, 1, 1, 1),
+  //       child: Icon(
+  //         Icons.add,
+  //         color: Colors.grey,
+  //       ),
+  //     );
+  //   } else {
+  //     return Image.file(File(_image.path));
+  //   }
+  // }
 
-  Future getImage() async {
-    final pickedFile = await Picker.pickImage(source: ImageSource.gallery);
-    setState(() {
-      if (pickedFile != null) {
-        _image = File(pickedFile.path);
-      } else {
-        print('No image selected.');
-      }
-    });
-  }
+  // Future getImage() async {
+  //   final pickedFile = await Picker.pickImage(source: ImageSource.gallery);
+  //   setState(() {
+  //     if (pickedFile != null) {
+  //       _image = File(pickedFile.path);
+  //     } else {
+  //       print('No image selected.');
+  //     }
+  //   });
+  // }
 
   _loadCategories() async {
     var response = await Api().getData('/category');
@@ -162,7 +181,10 @@ class _AddOfferState extends State<AddOfferView> {
     data['title'] = title;
     data['price'] = price;
     //data['user_id'] = user_id.toString();
+    data['bedrooms'] = bedrooms.toString();
+    data['bathrooms'] = bathrooms.toString();
     data['category_id'] = category_id.toString();
+
     // data['image'] = _image.path;
 
     // var response = await Api().postDataWithImage(data, '/offers', _image.path);

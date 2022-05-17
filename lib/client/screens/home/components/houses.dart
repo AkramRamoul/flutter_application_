@@ -55,15 +55,17 @@ class _HousesState extends State<Houses> {
             children: [
               Stack(
                 children: [
-                  // ClipRRect(
-                  //   borderRadius: BorderRadius.circular(20),
-                  //   child: Image(
-                  //     height: 180,
-                  //     width: size.width,
-                  //     fit: BoxFit.cover,
-                  //     image: AssetImage(house.imageUrl),
-                  //   ),
-                  // ),
+                  Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(width: 1),
+                    ),
+                    height: 180,
+                    width: size.width * 2,
+                    child: Image.asset(
+                      'assets/images/house1.jpeg',
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                   Positioned(
                     right: appPadding / 2,
                     top: appPadding / 2,
@@ -105,10 +107,10 @@ class _HousesState extends State<Houses> {
                   ),
                   Expanded(
                     child: Text(
-                      _offers[index]['price'].toString(),
+                      'price : ' + _offers[index]['price'].toString() + ' DA',
                       overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                          fontSize: 15, color: black.withOpacity(0.4)),
+                      style:
+                          TextStyle(fontSize: 15, color: black.withOpacity(1)),
                     ),
                   ),
                 ],
@@ -135,6 +137,7 @@ class _HousesState extends State<Houses> {
     var response = await Api().getData('/offer');
     if (response.statusCode == 200) {
       setState(() {
+        print(response.body);
         _offers = json.decode(response.body);
       });
     } else {
