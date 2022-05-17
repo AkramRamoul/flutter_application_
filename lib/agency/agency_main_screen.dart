@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'package:real_estate_app/agency/profilepage.dart';
+import 'package:real_estate_app/agency/screens/profilepage.dart';
 import 'package:real_estate_app/agency/screens/AddOfferView.dart';
 import 'package:real_estate_app/agency/screens/OffersListView.dart';
 
@@ -14,27 +13,6 @@ class Agencymain extends StatefulWidget {
 }
 
 class _AgencymainState extends State<Agencymain> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  void _getData() async {
-    var url = Uri.http('192.168.73.32:8000', '/api/offers/offer1');
-    var response = await http.get(url);
-    if (response.statusCode == 200) {
-      var snackBar = SnackBar(
-        content: Text(response.body),
-      );
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-    } else {
-      print('Request failed with status: ${response.statusCode}.');
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(

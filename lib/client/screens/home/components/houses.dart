@@ -2,8 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:real_estate_app/client/constants/constants.dart';
-import 'package:real_estate_app/client/data/data.dart';
-import 'package:real_estate_app/client/model/house.dart';
 import 'package:real_estate_app/client/screens/details/details_screen.dart';
 import 'package:real_estate_app/helpers/Api.dart';
 
@@ -27,7 +25,6 @@ class _HousesState extends State<Houses> {
     return Expanded(
       child: ListView.builder(
         physics: BouncingScrollPhysics(),
-        itemCount: _offers.length,
         itemBuilder: _buildHouse,
       ),
     );
@@ -96,7 +93,7 @@ class _HousesState extends State<Houses> {
               Row(
                 children: [
                   Text(
-                    _offers[index]['title'],
+                    '\$' + _offers[index]['price'].toString(),
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -107,25 +104,39 @@ class _HousesState extends State<Houses> {
                   ),
                   Expanded(
                     child: Text(
-                      'price : ' + _offers[index]['price'].toString() + ' DA',
+                      _offers[index]['title'],
                       overflow: TextOverflow.ellipsis,
-                      style:
-                          TextStyle(fontSize: 15, color: black.withOpacity(1)),
+                      style: TextStyle(
+                          fontSize: 15, color: black.withOpacity(0.4)),
                     ),
                   ),
                 ],
               ),
-              // Row(
-              //   children: [
-              //     Text(
-              //       '${house.sqFeet} metre',
-              //       style: TextStyle(
-              //         fontSize: 15,
-              //         fontWeight: FontWeight.w600,
-              //       ),
-              //     ),
-              //   ],
-              // )
+              Row(
+                children: [
+                  Text(
+                    _offers[index]['bedrooms'].toString() + ' bedrooms / ',
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  Text(
+                    _offers[index]['bathrooms'].toString() + ' bathrooms / ',
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  Text(
+                    _offers[index]['area'].toString() + 'm²',
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ],
+              )
             ],
           ),
         ),

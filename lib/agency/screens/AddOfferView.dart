@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 // import 'package:picker/picker.dart';
 import 'package:real_estate_app/helpers/Api.dart';
 
@@ -20,6 +21,7 @@ class _AddOfferState extends State<AddOfferView> {
   var user_id = 1;
   var title;
   var price;
+  var area;
   var bedrooms;
   var bathrooms;
   String category_id = "2";
@@ -28,8 +30,18 @@ class _AddOfferState extends State<AddOfferView> {
   //   {'id': 2, 'name': 'category 2'}
   // ];
 
-  // File _image;
-  //final picker = imagepic;
+  File _imageFile;
+  final _picker = ImagePicker();
+
+  Future getImage() async {
+    // ignore: deprecated_member_use
+    final PickedFile = await _picker.getImage(source: ImageSource.gallery);
+    if (PickedFile != null) {
+      setState(() {
+        _imageFile = File(PickedFile.path);
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +81,15 @@ class _AddOfferState extends State<AddOfferView> {
             TextFormField(
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
-                  icon: Icon(Icons.bathroom_outlined), labelText: 'bedrooms'),
+                  icon: Icon(Icons.square_foot), labelText: 'Surace Area'),
+              onChanged: (value) {
+                area = value;
+              },
+            ),
+            TextFormField(
+              keyboardType: TextInputType.number,
+              decoration:
+                  InputDecoration(icon: Icon(Icons.bed), labelText: 'bedrooms'),
               onChanged: (value) {
                 bedrooms = value;
               },
@@ -97,7 +117,7 @@ class _AddOfferState extends State<AddOfferView> {
               },
               value: category_id,
             ),
-            // OutlinedButton(onPressed: getImage, child: _buildImage()),
+            OutlinedButton(onPressed: getImage, child: _buildImage()),
             SizedBox(
               height: 20.0,
             ),
@@ -134,19 +154,19 @@ class _AddOfferState extends State<AddOfferView> {
   //   style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blue),
   // );
   // }
-  // Widget _buildImage() {
-  //   if (_image == null) {
-  //     return Padding(
-  //       padding: const EdgeInsets.fromLTRB(1, 1, 1, 1),
-  //       child: Icon(
-  //         Icons.add,
-  //         color: Colors.grey,
-  //       ),
-  //     );
-  //   } else {
-  //     return Image.file(File(_image.path));
-  //   }
-  // }
+  Widget _buildImage() {
+    if (_imageFile == null) {
+      return Padding(
+        padding: const EdgeInsets.fromLTRB(1, 1, 1, 1),
+        child: Icon(
+          Icons.add,
+          color: Colors.grey,
+        ),
+      );
+    } else {
+      return Image.file(File(_imageFile.path));
+    }
+  }
 
   // Future getImage() async {
   //   final pickedFile = await Picker.pickImage(source: ImageSource.gallery);
@@ -180,15 +200,17 @@ class _AddOfferState extends State<AddOfferView> {
     var data = new Map<String, String>();
     data['title'] = title;
     data['price'] = price;
+    data['area'] = area;
     //data['user_id'] = user_id.toString();
-    data['bedrooms'] = bedrooms.toString();
-    data['bathrooms'] = bathrooms.toString();
+    data['bedrooms'] = bedrooms;
+    data['bathrooms'] = bathrooms;
     data['category_id'] = category_id.toString();
 
     // data['image'] = _image.path;
 
-    // var response = await Api().postDataWithImage(data, '/offers', _image.path);
-    var response = await Api().postData(data, '/offer');
+    var response =
+        await Api().postDataWithImage(data, '/offers', _imageFile.path);
+    // var response = await Api().postData(data, '/offer');
 
     if (response.statusCode == 201) {
       Navigator.pop(context);

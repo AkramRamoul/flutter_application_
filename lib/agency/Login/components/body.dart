@@ -8,7 +8,6 @@ import 'package:real_estate_app/client/screens/Login/composants/rounded_input_fi
 import 'package:real_estate_app/client/screens/Login/composants/rounded_password_field.dart';
 import 'package:real_estate_app/client/screens/Login/ecrans/Login/components/background.dart';
 import 'package:real_estate_app/client/screens/Login/ecrans/Signup/signup_screen.dart';
-import 'package:real_estate_app/client/screens/home/home_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Body extends StatefulWidget {

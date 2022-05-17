@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:real_estate_app/helpers/Api.dart';
@@ -12,7 +13,6 @@ class OffersListView extends StatefulWidget {
 
 class _OffersListState extends State<OffersListView> {
   var _offers = [];
-
   @override
   void initState() {
     super.initState();

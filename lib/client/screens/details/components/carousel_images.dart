@@ -2,11 +2,6 @@ import 'package:carousel_pro/carousel_pro.dart';
 import 'package:flutter/material.dart';
 
 class CarouselImages extends StatefulWidget {
-
-  final List<String> imagesListUrl;
-
-  CarouselImages(this.imagesListUrl);
-
   @override
   _CarouselImagesState createState() => _CarouselImagesState();
 }
@@ -14,7 +9,6 @@ class CarouselImages extends StatefulWidget {
 class _CarouselImagesState extends State<CarouselImages> {
   @override
   Widget build(BuildContext context) {
-
     Size size = MediaQuery.of(context).size;
 
     return Container(
@@ -24,12 +18,18 @@ class _CarouselImagesState extends State<CarouselImages> {
         dotBgColor: Colors.transparent,
         autoplay: false,
         images: [
-          AssetImage(widget.imagesListUrl[0],),
-          AssetImage(widget.imagesListUrl[1],),
-          AssetImage(widget.imagesListUrl[2],),
-          AssetImage(widget.imagesListUrl[3],),
-          AssetImage(widget.imagesListUrl[4],),
-          AssetImage(widget.imagesListUrl[5],),
+          Image.asset(
+            'assets/images/house1.jpeg',
+            fit: BoxFit.cover,
+          ),
+          Image.asset(
+            'assets/images/indoor1.jpg',
+            fit: BoxFit.cover,
+          ),
+          Image.asset(
+            'assets/images/indoor2.jpg',
+            fit: BoxFit.cover,
+          ),
         ],
       ),
     );
