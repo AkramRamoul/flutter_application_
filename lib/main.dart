@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:real_estate_app/client/constants/constants.dart';
 import 'package:real_estate_app/firstscreen/FIRSTSCREEN.dart';
+import 'package:real_estate_app/loading.dart';
 
 void main() {
   runApp(MyApp());
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
           scaffoldBackgroundColor: white),
-      home: WelcomeScreen(),
+      home: Loading(),
     );
   }
 }

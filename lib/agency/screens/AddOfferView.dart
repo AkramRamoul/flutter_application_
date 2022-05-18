@@ -30,18 +30,18 @@ class _AddOfferState extends State<AddOfferView> {
   //   {'id': 2, 'name': 'category 2'}
   // ];
 
-  File _imageFile;
-  final _picker = ImagePicker();
+  // File _imageFile;
+  // final _picker = ImagePicker();
 
-  Future getImage() async {
-    // ignore: deprecated_member_use
-    final PickedFile = await _picker.getImage(source: ImageSource.gallery);
-    if (PickedFile != null) {
-      setState(() {
-        _imageFile = File(PickedFile.path);
-      });
-    }
-  }
+  // Future getImage() async {
+  //   // ignore: deprecated_member_use
+  //   final PickedFile = await _picker.getImage(source: ImageSource.gallery);
+  //   if (PickedFile != null) {
+  //     setState(() {
+  //       _imageFile = File(PickedFile.path);
+  //     });
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -117,7 +117,7 @@ class _AddOfferState extends State<AddOfferView> {
               },
               value: category_id,
             ),
-            OutlinedButton(onPressed: getImage, child: _buildImage()),
+            // OutlinedButton(onPressed: getImage, child: _buildImage()),
             SizedBox(
               height: 20.0,
             ),
@@ -154,19 +154,19 @@ class _AddOfferState extends State<AddOfferView> {
   //   style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blue),
   // );
   // }
-  Widget _buildImage() {
-    if (_imageFile == null) {
-      return Padding(
-        padding: const EdgeInsets.fromLTRB(1, 1, 1, 1),
-        child: Icon(
-          Icons.add,
-          color: Colors.grey,
-        ),
-      );
-    } else {
-      return Image.file(File(_imageFile.path));
-    }
-  }
+  // Widget _buildImage() {
+  //   if (_imageFile == null) {
+  //     return Padding(
+  //       padding: const EdgeInsets.fromLTRB(1, 1, 1, 1),
+  //       child: Icon(
+  //         Icons.add,
+  //         color: Colors.grey,
+  //       ),
+  //     );
+  //   } else {
+  //     return Image.file(File(_imageFile.path));
+  //   }
+  // }
 
   // Future getImage() async {
   //   final pickedFile = await Picker.pickImage(source: ImageSource.gallery);
@@ -206,11 +206,11 @@ class _AddOfferState extends State<AddOfferView> {
     data['bathrooms'] = bathrooms;
     data['category_id'] = category_id.toString();
 
-    // data['image'] = _image.path;
+    // data['image'] = _imageFile.path;
 
-    var response =
-        await Api().postDataWithImage(data, '/offers', _imageFile.path);
-    // var response = await Api().postData(data, '/offer');
+    // var response =
+    // await Api().postDataWithImage(data, '/offers', _imageFile.path);
+    var response = await Api().postData(data, '/offer');
 
     if (response.statusCode == 201) {
       Navigator.pop(context);

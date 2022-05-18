@@ -25,6 +25,7 @@ class _HousesState extends State<Houses> {
     return Expanded(
       child: ListView.builder(
         physics: BouncingScrollPhysics(),
+        itemCount: _offers.length,
         itemBuilder: _buildHouse,
       ),
     );

@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:real_estate_app/helpers/Api.dart';
@@ -44,7 +43,7 @@ class _OffersListState extends State<OffersListView> {
   Widget _buildOfferItem(BuildContext context, int index) {
     return Card(
       child: ListTile(
-        //leading: Image.network(Api().getOfferImageUrl(_meals[index]['Id'])),
+        leading: Image.network(Api().getOfferImageUrl(_offers[index]['Id'])),
         title: Text(_offers[index]['title'],
             style: TextStyle(color: Colors.black54)),
         subtitle: Text(_offers[index]['price'].toString(),
@@ -58,7 +57,7 @@ class _OffersListState extends State<OffersListView> {
     var response = await Api().getData('/offer');
     if (response.statusCode == 200) {
       setState(() {
-        print(response.body);
+        // print(response.body);
         _offers = json.decode(response.body);
       });
     } else {

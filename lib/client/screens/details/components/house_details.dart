@@ -27,6 +27,7 @@ class _HouseDetailsState extends State<HouseDetails> {
         physics: BouncingScrollPhysics(),
         shrinkWrap: true,
         itemBuilder: _builddetails,
+        itemCount: _offers.length,
       ),
     );
   }
