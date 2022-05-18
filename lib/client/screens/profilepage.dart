@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:real_estate_app/client/screens/home/home_screen.dart';
+import 'package:real_estate_app/firstscreen/FIRSTSCREEN.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class UserProfilePage extends StatefulWidget {
   @override
@@ -18,7 +20,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
           elevation: 0,
           leading: IconButton(
             icon: Icon(Icons.arrow_back),
-            color: Colors.black,
+            color: Color.fromRGBO(0, 0, 0, 1),
             onPressed: () {
               Navigator.push(
                 context,
@@ -30,6 +32,20 @@ class _UserProfilePageState extends State<UserProfilePage> {
               );
             },
           ),
+          actions: [
+            IconButton(
+              onPressed: () {
+                logout().then((value) => {
+                      Navigator.of(context).pushAndRemoveUntil(
+                          MaterialPageRoute(
+                              builder: (context) => WelcomeScreen()),
+                          (route) => false)
+                    });
+              },
+              icon: Icon(Icons.exit_to_app),
+              color: Color.fromRGBO(0, 0, 0, 1),
+            )
+          ],
         ),
         backgroundColor: Colors.white,
         body: Column(
@@ -54,7 +70,6 @@ class _UserProfilePageState extends State<UserProfilePage> {
             ),
             SizedBox(height: 15),
 
-            // buttons -> edit profile, insta links, bookmark
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -96,4 +111,9 @@ class _UserProfilePageState extends State<UserProfilePage> {
       ),
     );
   }
+}
+
+Future<bool> logout() async {
+  SharedPreferences pref = await SharedPreferences.getInstance();
+  return await pref.remove('token');
 }
