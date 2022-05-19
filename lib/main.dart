@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:real_estate_app/agency/agency_main_screen.dart';
+import 'package:real_estate_app/agency/screens/OffersListView.dart';
 import 'package:real_estate_app/client/constants/constants.dart';
 import 'package:real_estate_app/firstscreen/FIRSTSCREEN.dart';
 import 'package:real_estate_app/loading.dart';

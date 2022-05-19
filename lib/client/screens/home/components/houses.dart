@@ -35,14 +35,6 @@ class _HousesState extends State<Houses> {
     Size size = MediaQuery.of(context).size;
 
     return GestureDetector(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (_) => DetailsScreen(),
-          ),
-        );
-      },
       child: Padding(
         padding: EdgeInsets.symmetric(
             horizontal: appPadding, vertical: appPadding / 2),

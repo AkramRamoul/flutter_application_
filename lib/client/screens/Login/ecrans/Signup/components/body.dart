@@ -97,7 +97,7 @@ class _BodyState extends State<Body> {
     map['password'] = password;
     var response = await Api().postData(data, '/register');
 
-    if (response.statusCode == 200) {
+    if (response.statusCode == 201) {
       var body = json.decode(response.body);
       _showMsg(response.body);
 
