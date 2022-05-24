@@ -46,7 +46,7 @@ class _HousesState extends State<Houses> {
               Stack(
                 children: [
                   ClipRRect(
-                    borderRadius: BorderRadius.circular(3),
+                    borderRadius: BorderRadius.circular(10),
                     child: Image.asset(
                       'assets/images/house1.jpeg',
                       fit: BoxFit.cover,

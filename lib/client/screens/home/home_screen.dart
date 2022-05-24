@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:real_estate_app/client/screens/home/components/custom_app_bar.dart';
 import 'package:real_estate_app/client/screens/home/components/houses.dart';
+import 'package:real_estate_app/client/screens/home/components/mapbutton.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -16,7 +17,7 @@ class HomeScreen extends StatelessWidget {
               Houses(),
             ],
           ),
-          // BottomButtons(),
+          MapButton(),
         ],
       ),
     );

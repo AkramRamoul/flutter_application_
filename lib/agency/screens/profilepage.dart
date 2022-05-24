@@ -35,42 +35,10 @@ class _AgencyProfilePageState extends State<AgencyProfilePage> {
             ),
             SizedBox(height: 15),
 
-            // buttons -> edit profile, insta links, bookmark
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  padding: EdgeInsets.symmetric(vertical: 15, horizontal: 40),
-                  child: Text('Edit profile',
-                      style: TextStyle(color: Colors.black, fontSize: 20)),
-                  decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey.shade300),
-                      borderRadius: BorderRadius.circular(5)),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                  child: Container(
-                    padding: EdgeInsets.all(15),
-                    child: Icon(
-                      Icons.camera_alt,
-                      color: Colors.grey[800],
-                    ),
-                    decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey.shade300),
-                        borderRadius: BorderRadius.circular(5)),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: 15),
-            // default tab controller
-
-            TabBar(
-              tabs: [
-                Tab(
-                  icon: Icon(Icons.favorite, color: Colors.black),
-                ),
-              ],
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [],
             ),
           ],
         ),

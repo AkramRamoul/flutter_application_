@@ -28,19 +28,6 @@ class _AddOfferState extends State<AddOfferView> {
   var bathrooms;
   String category_id = "2";
   var categories = [];
-  //   {'id': 1, 'name': 'category 1'},
-  //   {'id': 2, 'name': 'category 2'}
-  // ];
-
-  // Future getImage() async {
-  //   // ignore: deprecated_member_use
-  //   final PickedFile = await _picker.getImage(source: ImageSource.gallery);
-  //   if (PickedFile != null) {
-  //     setState(() {
-  //       _imageFile = File(PickedFile.path);
-  //     });
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {

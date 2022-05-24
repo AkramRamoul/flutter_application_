@@ -29,15 +29,6 @@ class _OffersListState extends State<OffersListView> {
           itemCount: _offers.length,
         ))
       ]),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => AddOfferView()))
-              .then((_) => _loadOffers());
-        },
-        tooltip: 'Add',
-        child: Icon(Icons.add),
-      ),
     );
   }
 

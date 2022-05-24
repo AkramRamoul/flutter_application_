@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:real_estate_app/agency/Login/Agency_login_screen.dart';
 import 'package:real_estate_app/agency/screens/profilepage.dart';
 import 'package:real_estate_app/agency/screens/AddOfferView.dart';
 import 'package:real_estate_app/agency/screens/OffersListView.dart';
+import 'package:real_estate_app/firstscreen/FIRSTSCREEN.dart';
+
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Agencymain extends StatefulWidget {
   Agencymain({Key key, this.title}) : super(key: key);
@@ -19,10 +23,24 @@ class _AgencymainState extends State<Agencymain> {
       length: 3,
       child: Scaffold(
         appBar: AppBar(
-          title: Text(' Manage your Offers',
-              style: TextStyle(color: Colors.white)),
+          title: Text(' Manage Your Offers',
+              style: TextStyle(color: Colors.black)),
+          backgroundColor: Colors.transparent,
           elevation: 0,
-          centerTitle: true,
+          actions: [
+            IconButton(
+              onPressed: () {
+                logout().then((value) => {
+                      Navigator.of(context).pushAndRemoveUntil(
+                          MaterialPageRoute(
+                              builder: (context) => WelcomeScreen()),
+                          (route) => false)
+                    });
+              },
+              icon: Icon(Icons.exit_to_app),
+              color: Color.fromRGBO(0, 0, 0, 1),
+            )
+          ],
         ),
         backgroundColor: Colors.white,
         body: Column(
@@ -59,5 +77,10 @@ class _AgencymainState extends State<Agencymain> {
         ),
       ),
     );
+  }
+
+  Future<bool> logout() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    return await pref.remove('token');
   }
 }

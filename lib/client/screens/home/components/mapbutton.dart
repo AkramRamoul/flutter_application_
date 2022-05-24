@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:real_estate_app/client/constants/constants.dart';
+import 'package:real_estate_app/client/screens/details/components/mapview.dart';
 
-class BottomButtons extends StatelessWidget {
+class MapButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -23,18 +24,16 @@ class BottomButtons extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              (Icons.map_outlined),
-              color: white,
-            ),
-            Text(
-              ' Map view',
-              style: TextStyle(
+            IconButton(
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => MapView()));
+              },
+              icon: Icon(
+                (Icons.map_outlined),
                 color: white,
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
               ),
-            )
+            ),
           ],
         ),
       ),

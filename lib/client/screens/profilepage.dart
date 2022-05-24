@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:real_estate_app/client/screens/home/home_screen.dart';
 import 'package:real_estate_app/firstscreen/FIRSTSCREEN.dart';
+import 'package:real_estate_app/helpers/Api.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserProfilePage extends StatefulWidget {
@@ -10,6 +13,14 @@ class UserProfilePage extends StatefulWidget {
 
 class _UserProfilePageState extends State<UserProfilePage> {
   @override
+  var _offers = [];
+  bool isFav = false;
+  @override
+  void initState() {
+    super.initState();
+    _loadOffers();
+  }
+
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 1,
@@ -97,19 +108,24 @@ class _UserProfilePageState extends State<UserProfilePage> {
               ],
             ),
             SizedBox(height: 15),
-            // default tab controller
-
-            TabBar(
-              tabs: [
-                Tab(
-                  icon: Icon(Icons.favorite, color: Colors.black),
-                ),
-              ],
-            ),
           ],
         ),
       ),
     );
+  }
+
+  _loadOffers() async {
+    var response = await Api().getData('/user');
+    if (response.statusCode == 200) {
+      setState(() {
+        print(response.body);
+        _offers = json.decode(response.body);
+      });
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text('Error ' + response.statusCode + ': ' + response.body),
+      ));
+    }
   }
 }
 

@@ -15,11 +15,11 @@ class BottomButtons extends StatelessWidget {
             width: size.width * 0.4,
             height: 60,
             decoration: BoxDecoration(
-                color: darkBlue,
+                color: Colors.deepPurple,
                 borderRadius: BorderRadius.circular(30),
                 boxShadow: [
                   BoxShadow(
-                      color: darkBlue.withOpacity(0.6),
+                      color: Colors.deepPurple.withOpacity(0.6),
                       offset: Offset(0, 10),
                       blurRadius: 10)
                 ]),
@@ -31,14 +31,6 @@ class BottomButtons extends StatelessWidget {
                   color: white,
                   onPressed: () {},
                 ),
-                Text(
-                  ' Message',
-                  style: TextStyle(
-                    color: white,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                  ),
-                )
               ],
             ),
           ),
@@ -46,11 +38,11 @@ class BottomButtons extends StatelessWidget {
             width: size.width * 0.4,
             height: 60,
             decoration: BoxDecoration(
-                color: darkBlue,
+                color: Colors.deepPurple,
                 borderRadius: BorderRadius.circular(30),
                 boxShadow: [
                   BoxShadow(
-                      color: darkBlue.withOpacity(0.6),
+                      color: Colors.deepPurple.withOpacity(0.6),
                       offset: Offset(0, 10),
                       blurRadius: 10)
                 ]),
@@ -62,14 +54,6 @@ class BottomButtons extends StatelessWidget {
                   color: white,
                   onPressed: () {},
                 ),
-                Text(
-                  ' Call',
-                  style: TextStyle(
-                    color: white,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                  ),
-                )
               ],
             ),
           ),

@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:real_estate_app/client/constants/constants.dart';
-import 'package:carousel_pro/carousel_pro.dart';
 import 'package:flutter/material.dart';
+import 'package:real_estate_app/client/screens/details/components/bottom_buttons.dart';
 import 'package:real_estate_app/helpers/Api.dart';
 
 import '../../../constants/constants.dart';
@@ -46,6 +46,10 @@ class _OfferDetailsState extends State<housedetails> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
+            _buildGridView(),
+            SizedBox(
+              height: 100,
+            ),
             Padding(
               padding:
                   const EdgeInsets.only(left: appPadding, bottom: appPadding),
@@ -56,10 +60,6 @@ class _OfferDetailsState extends State<housedetails> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-            ),
-            _buildGridView(),
-            SizedBox(
-              height: 50,
             ),
             Container(
               height: 130,
@@ -224,13 +224,10 @@ class _OfferDetailsState extends State<housedetails> {
                 ],
               ),
             ),
-            Padding(
-              padding: EdgeInsets.only(
-                left: appPadding,
-                right: appPadding,
-                bottom: appPadding * 4,
-              ),
+            SizedBox(
+              height: 30,
             ),
+            BottomButtons(),
           ],
         ),
       ),
@@ -246,13 +243,19 @@ class _OfferDetailsState extends State<housedetails> {
   // }
 
   Widget _buildGridView() {
-    return Container(
-      child: Carousel(
-        images: [
-          Image.network(
-            Api().getOfferImageUrl(offer['images']['id']),
-          ),
-        ],
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(3),
+      child: GridView.count(
+        shrinkWrap: true,
+        crossAxisCount: 2,
+        children: List.generate(offer['images'].length, (index) {
+          return Container(
+            child: Image.network(
+              Api().getOfferImageUrl(offer['images'][index]['id']),
+              fit: BoxFit.cover,
+            ),
+          );
+        }),
       ),
     );
   }
