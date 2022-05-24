@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:real_estate_app/client/screens/home/components/categories.dart';
+
 import 'package:real_estate_app/client/screens/home/components/custom_app_bar.dart';
 import 'package:real_estate_app/client/screens/home/components/houses.dart';
 
@@ -13,7 +13,6 @@ class HomeScreen extends StatelessWidget {
           Column(
             children: [
               CustomAppBar(),
-              Categories(),
               Houses(),
             ],
           ),

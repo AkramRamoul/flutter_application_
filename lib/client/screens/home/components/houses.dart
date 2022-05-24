@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:real_estate_app/client/constants/constants.dart';
-import 'package:real_estate_app/client/screens/details/details_screen.dart';
+import 'package:real_estate_app/client/screens/details/components/housedetails.dart';
 import 'package:real_estate_app/helpers/Api.dart';
 
 class Houses extends StatefulWidget {
@@ -45,42 +45,15 @@ class _HousesState extends State<Houses> {
             children: [
               Stack(
                 children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(width: 1),
-                    ),
-                    height: 180,
-                    width: size.width * 2,
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(3),
                     child: Image.asset(
                       'assets/images/house1.jpeg',
                       fit: BoxFit.cover,
+                      height: 180,
+                      width: 600,
                     ),
                   ),
-                  Positioned(
-                    right: appPadding / 2,
-                    top: appPadding / 2,
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: white,
-                          borderRadius: BorderRadius.circular(15)),
-                      child: IconButton(
-                        icon: isFav
-                            ? Icon(
-                                Icons.favorite_rounded,
-                                color: red,
-                              )
-                            : Icon(
-                                Icons.favorite_border_rounded,
-                                color: black,
-                              ),
-                        onPressed: () {
-                          setState(() {
-                            isFav = !isFav;
-                          });
-                        },
-                      ),
-                    ),
-                  )
                 ],
               ),
               Row(
@@ -134,6 +107,13 @@ class _HousesState extends State<Houses> {
           ),
         ),
       ),
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    housedetails(offer_id: _offers[index]['id'])));
+      },
     );
   }
 

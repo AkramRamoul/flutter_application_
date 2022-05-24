@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:carousel_pro/carousel_pro.dart';
-
+import 'package:real_estate_app/agency/screens/OfferDetailsView.dart';
 import 'package:real_estate_app/helpers/Api.dart';
 import 'AddOfferView.dart';
 
@@ -62,8 +61,14 @@ class _OffersListState extends State<OffersListView> {
                 color: Colors.black.withOpacity(0.6),
               ),
             ),
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          OfferDetailsView(offer_id: _offers[index]['id'])));
+            },
           ),
-          Image.network(Api().getOfferImageUrl(_offers[index]['id'])),
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Text(
@@ -81,13 +86,6 @@ class _OffersListState extends State<OffersListView> {
           ButtonBar(
             alignment: MainAxisAlignment.start,
             children: [
-              FlatButton(
-                textColor: const Color(0xFF6200EE),
-                onPressed: () {
-                  // Perform some action
-                },
-                child: const Text('Edit Offer'),
-              ),
               FlatButton(
                 textColor: const Color(0xFF6200EE),
                 onPressed: () {

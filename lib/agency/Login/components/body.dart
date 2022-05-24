@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:real_estate_app/agency/Login/components/background.dart';
 import 'package:real_estate_app/agency/agency_main_screen.dart';
 import 'package:real_estate_app/helpers/Api.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +7,6 @@ import 'package:real_estate_app/client/screens/Login/composants/already_have_an_
 import 'package:real_estate_app/client/screens/Login/composants/rounded_button.dart';
 import 'package:real_estate_app/client/screens/Login/composants/rounded_input_field.dart';
 import 'package:real_estate_app/client/screens/Login/composants/rounded_password_field.dart';
-import 'package:real_estate_app/client/screens/Login/ecrans/Login/components/background.dart';
 import 'package:real_estate_app/client/screens/Login/ecrans/Signup/signup_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -38,7 +38,7 @@ class _BodyState extends State<Body> {
             ),
             SizedBox(height: size.height * 0.03),
             Image.asset(
-              "assets/images/login.png",
+              "assets/icons/login.png",
               height: size.height * 0.35,
             ),
             SizedBox(height: size.height * 0.03),
@@ -103,11 +103,13 @@ class _BodyState extends State<Body> {
 
     if (response.statusCode == 200) {
       var body = json.decode(response.body);
-      // _showMsg(response.body);
+      _showMsg(response.body);
 
       SharedPreferences localStorage = await SharedPreferences.getInstance();
       localStorage.setString('token', json.encode(body['token']));
       localStorage.setString('user', json.encode(body['user']));
+      localStorage.setString('user', json.encode(body['id']));
+
       Navigator.push(
         context,
         new MaterialPageRoute(builder: (context) => Agencymain()),

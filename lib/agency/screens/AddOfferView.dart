@@ -16,6 +16,10 @@ class _AddOfferState extends State<AddOfferView> {
     _loadCategories();
   }
 
+  final _picker = ImagePicker();
+  List<XFile> images = [];
+  File _image;
+
   var user_id = 1;
   var title;
   var price;
@@ -27,9 +31,6 @@ class _AddOfferState extends State<AddOfferView> {
   //   {'id': 1, 'name': 'category 1'},
   //   {'id': 2, 'name': 'category 2'}
   // ];
-
-  File _image;
-  final _picker = ImagePicker();
 
   // Future getImage() async {
   //   // ignore: deprecated_member_use
@@ -115,7 +116,14 @@ class _AddOfferState extends State<AddOfferView> {
               },
               value: category_id,
             ),
-            OutlinedButton(onPressed: getImage, child: _buildImage()),
+            // OutlinedButton(onPressed: getImage, child: _buildImage()),
+            ElevatedButton(
+              onPressed: _pickImages,
+              child: Text(
+                'Add Images',
+              ),
+            ),
+            _buildGridView(),
             SizedBox(
               height: 20.0,
             ),
@@ -137,7 +145,7 @@ class _AddOfferState extends State<AddOfferView> {
         _submit();
       },
       style: ElevatedButton.styleFrom(
-        primary: Colors.blue,
+        primary: Colors.deepPurple,
       ),
       child: Text(
         'Submit',
@@ -178,6 +186,52 @@ class _AddOfferState extends State<AddOfferView> {
     });
   }
 
+  Widget _buildGridView() {
+    return GridView.count(
+      shrinkWrap: true,
+      crossAxisCount: 3,
+      childAspectRatio: 1,
+      children: List.generate(images.length, (index) {
+        File image = File(images[index].path);
+        return Card(
+          clipBehavior: Clip.antiAlias,
+          child: Stack(
+            children: <Widget>[
+              Image.file(
+                image,
+                width: 300,
+                height: 300,
+              ),
+              Positioned(
+                right: 5,
+                top: 5,
+                child: InkWell(
+                  child: Icon(
+                    Icons.remove_circle,
+                    size: 30,
+                    color: Colors.red,
+                  ),
+                  onTap: () {
+                    setState(() {
+                      images.removeAt(index);
+                    });
+                  },
+                ),
+              ),
+            ],
+          ),
+        );
+      }),
+    );
+  }
+
+  _pickImages() async {
+    List<XFile> res = await _picker.pickMultiImage();
+    setState(() {
+      images.addAll(res);
+    });
+  }
+
   _loadCategories() async {
     var response = await Api().getData('/category');
     if (response.statusCode == 200) {
@@ -200,13 +254,14 @@ class _AddOfferState extends State<AddOfferView> {
     data['title'] = title;
     data['price'] = price;
     data['area'] = area;
-    // data['user_id'] = user_id.toString();
+    data['user_id'] = user_id.toString();
     data['bedrooms'] = bedrooms;
     data['bathrooms'] = bathrooms;
     data['category_id'] = category_id.toString();
-    data['image'] = _image.path;
+    // data['image'] = _image.path;
 
-    var response = await Api().postDataWithImage(data, '/offer', _image.path);
+    var response = await Api().postDataWithImages(data, '/offer', images);
+
     // var response = await Api().postData(data, '/offer');
 
     if (response.statusCode == 201) {

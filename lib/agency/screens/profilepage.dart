@@ -12,25 +12,6 @@ class _AgencyProfilePageState extends State<AgencyProfilePage> {
     return DefaultTabController(
       length: 1,
       child: Scaffold(
-        appBar: AppBar(
-          title: Text(' Name', style: TextStyle(color: Colors.black)),
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back),
-            color: Colors.black,
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) {
-                    return HomeScreen();
-                  },
-                ),
-              );
-            },
-          ),
-        ),
         backgroundColor: Colors.white,
         body: Column(
           children: [
