@@ -15,11 +15,11 @@ class BottomButtons extends StatelessWidget {
             width: size.width * 0.4,
             height: 60,
             decoration: BoxDecoration(
-                color: Colors.deepPurple,
+                color: darkBlue,
                 borderRadius: BorderRadius.circular(30),
                 boxShadow: [
                   BoxShadow(
-                      color: Colors.deepPurple.withOpacity(0.6),
+                      color: darkBlue.withOpacity(0.6),
                       offset: Offset(0, 10),
                       blurRadius: 10)
                 ]),
@@ -38,11 +38,11 @@ class BottomButtons extends StatelessWidget {
             width: size.width * 0.4,
             height: 60,
             decoration: BoxDecoration(
-                color: Colors.deepPurple,
+                color: darkBlue,
                 borderRadius: BorderRadius.circular(30),
                 boxShadow: [
                   BoxShadow(
-                      color: Colors.deepPurple.withOpacity(0.6),
+                      color: darkBlue.withOpacity(0.6),
                       offset: Offset(0, 10),
                       blurRadius: 10)
                 ]),

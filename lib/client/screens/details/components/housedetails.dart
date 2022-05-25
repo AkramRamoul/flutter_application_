@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'package:photo_view/photo_view.dart';
+import 'package:photo_view/photo_view_gallery.dart';
 import 'package:real_estate_app/client/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:real_estate_app/client/screens/details/components/bottom_buttons.dart';
@@ -243,19 +245,28 @@ class _OfferDetailsState extends State<housedetails> {
   // }
 
   Widget _buildGridView() {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(3),
-      child: GridView.count(
-        shrinkWrap: true,
-        crossAxisCount: 2,
-        children: List.generate(offer['images'].length, (index) {
-          return Container(
-            child: Image.network(
-              Api().getOfferImageUrl(offer['images'][index]['id']),
-              fit: BoxFit.cover,
-            ),
+    return Container(
+      child: PhotoViewGallery.builder(
+        scrollPhysics: const BouncingScrollPhysics(),
+        builder: (BuildContext context, int index) {
+          return PhotoViewGalleryPageOptions(
+            imageProvider: NetworkImage(
+                Api().getOfferImageUrl(offer['images'][index]['id'])),
+            initialScale: PhotoViewComputedScale.contained * 0.8,
           );
-        }),
+        },
+        itemCount: offer['images'].length,
+        loadingBuilder: (context, event) => Center(
+          child: Container(
+            width: 20.0,
+            height: 20.0,
+            child: CircularProgressIndicator(
+              value: event == null
+                  ? 0
+                  : event.cumulativeBytesLoaded / event.expectedTotalBytes,
+            ),
+          ),
+        ),
       ),
     );
   }

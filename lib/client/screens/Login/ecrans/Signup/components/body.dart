@@ -34,7 +34,7 @@ class _BodyState extends State<Body> {
             ),
             SizedBox(height: size.height * 0.03),
             Image.asset(
-              "assets/images/signup.png",
+              "assets/icons/broker3.jpg",
               height: size.height * 0.35,
             ),
             RoundedInputField(

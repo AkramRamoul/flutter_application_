@@ -16,12 +16,12 @@ class Body extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              "What Do you Want To Do ",
+              "What Do you Want To Do ?",
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
             ),
             SizedBox(height: size.height * 0.05),
             Image.asset(
-              "assets/icons/chat.png",
+              "assets/icons/house.jpg",
               height: size.height * 0.45,
             ),
             SizedBox(height: size.height * 0.05),
