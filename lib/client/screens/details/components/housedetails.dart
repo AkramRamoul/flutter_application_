@@ -5,7 +5,7 @@ import 'package:real_estate_app/client/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:real_estate_app/client/screens/details/components/bottom_buttons.dart';
 import 'package:real_estate_app/helpers/Api.dart';
-
+import 'package:url_launcher/url_launcher.dart';
 import '../../../constants/constants.dart';
 
 class housedetails extends StatefulWidget {
@@ -28,13 +28,23 @@ class _OfferDetailsState extends State<housedetails> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: EdgeInsets.fromLTRB(0, 80, 0, 0),
+        padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
         child: Stack(
+          alignment: Alignment.bottomCenter,
           children: <Widget>[
-            Align(
-              alignment: Alignment.topCenter,
-              child: offer != null ? _buildFormFields() : Text('Loading...'),
-            )
+            Column(
+              children: [
+                Align(
+                  child:
+                      offer != null ? _buildFormFields() : Text('Loading...'),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            _buildGridView(),
+            buildButtons(),
           ],
         ),
       ),
@@ -43,12 +53,11 @@ class _OfferDetailsState extends State<housedetails> {
 
   Widget _buildFormFields() {
     return Container(
-      margin: EdgeInsets.only(left: 20.0, right: 20.0, bottom: 80.0),
+      margin: EdgeInsets.only(left: 20.0, right: 20.0, bottom: 100.0),
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            _buildGridView(),
             SizedBox(
               height: 100,
             ),
@@ -74,36 +83,27 @@ class _OfferDetailsState extends State<housedetails> {
                       left: appPadding,
                       bottom: appPadding,
                     ),
-                    child: Container(
-                      width: 100,
-                      decoration: BoxDecoration(
-                          color: white,
-                          borderRadius: BorderRadius.circular(20),
-                          border: Border.all(
-                            color: black.withOpacity(0.4),
-                          )),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            offer['price'].toString(),
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          offer['price'].toString(),
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
                           ),
-                          SizedBox(
-                            height: 10,
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          'Dinars',
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600,
                           ),
-                          Text(
-                            'Dinars',
-                            style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                   Padding(
@@ -111,36 +111,27 @@ class _OfferDetailsState extends State<housedetails> {
                       left: appPadding,
                       bottom: appPadding,
                     ),
-                    child: Container(
-                      width: 100,
-                      decoration: BoxDecoration(
-                          color: white,
-                          borderRadius: BorderRadius.circular(20),
-                          border: Border.all(
-                            color: black.withOpacity(0.4),
-                          )),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            offer['area'].toString(),
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          offer['area'].toString(),
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
                           ),
-                          SizedBox(
-                            height: 10,
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          'm²',
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600,
                           ),
-                          Text(
-                            'm²',
-                            style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                   Padding(
@@ -148,36 +139,27 @@ class _OfferDetailsState extends State<housedetails> {
                       left: appPadding,
                       bottom: appPadding,
                     ),
-                    child: Container(
-                      width: 100,
-                      decoration: BoxDecoration(
-                          color: white,
-                          borderRadius: BorderRadius.circular(20),
-                          border: Border.all(
-                            color: black.withOpacity(0.4),
-                          )),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            offer['bedrooms'].toString(),
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          offer['bedrooms'].toString(),
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
                           ),
-                          SizedBox(
-                            height: 10,
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          'Bedrooms',
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600,
                           ),
-                          Text(
-                            'Bedrooms',
-                            style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                   Padding(
@@ -185,36 +167,27 @@ class _OfferDetailsState extends State<housedetails> {
                       left: appPadding,
                       bottom: appPadding,
                     ),
-                    child: Container(
-                      width: 100,
-                      decoration: BoxDecoration(
-                          color: white,
-                          borderRadius: BorderRadius.circular(20),
-                          border: Border.all(
-                            color: black.withOpacity(0.4),
-                          )),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            offer['bathrooms'].toString(),
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          offer['bathrooms'].toString(),
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
                           ),
-                          SizedBox(
-                            height: 10,
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          'Bathrooms',
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600,
                           ),
-                          Text(
-                            'Bathrooms',
-                            style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                   Padding(
@@ -226,26 +199,77 @@ class _OfferDetailsState extends State<housedetails> {
                 ],
               ),
             ),
-            SizedBox(
-              height: 30,
-            ),
-            BottomButtons(),
           ],
         ),
       ),
     );
   }
 
-  // Widget _buildRegisterText() {
-  // return Text(
-  //   'REGISTER',
-  //   textAlign: TextAlign.center,
-  //   style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blue),
-  // );
-  // }
+  Widget buildButtons() {
+    Size size = MediaQuery.of(context).size;
+    String _phoneNumber = offer['number'];
+
+    return Padding(
+      padding: const EdgeInsets.only(bottom: appPadding),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Container(
+            width: size.width * 0.4,
+            height: 60,
+            decoration: BoxDecoration(
+                color: darkBlue,
+                borderRadius: BorderRadius.circular(30),
+                boxShadow: [
+                  BoxShadow(
+                      color: darkBlue.withOpacity(0.6),
+                      offset: Offset(0, 10),
+                      blurRadius: 10)
+                ]),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                IconButton(
+                  icon: Icon(Icons.mail_rounded),
+                  color: white,
+                  onPressed: () {},
+                ),
+              ],
+            ),
+          ),
+          Container(
+            width: size.width * 0.4,
+            height: 60,
+            decoration: BoxDecoration(
+                color: darkBlue,
+                borderRadius: BorderRadius.circular(30),
+                boxShadow: [
+                  BoxShadow(
+                      color: darkBlue.withOpacity(0.6),
+                      offset: Offset(0, 10),
+                      blurRadius: 10)
+                ]),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                IconButton(
+                  icon: Icon(Icons.call_rounded),
+                  color: white,
+                  onPressed: () async {
+                    launch('tel:$_phoneNumber');
+                  },
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 
   Widget _buildGridView() {
     return Container(
+      width: MediaQuery.of(context).size.width,
       child: PhotoViewGallery.builder(
         scrollPhysics: const BouncingScrollPhysics(),
         builder: (BuildContext context, int index) {
@@ -258,7 +282,7 @@ class _OfferDetailsState extends State<housedetails> {
         itemCount: offer['images'].length,
         loadingBuilder: (context, event) => Center(
           child: Container(
-            width: 20.0,
+            width: MediaQuery.of(context).size.width * 0.8,
             height: 20.0,
             child: CircularProgressIndicator(
               value: event == null
@@ -266,6 +290,9 @@ class _OfferDetailsState extends State<housedetails> {
                   : event.cumulativeBytesLoaded / event.expectedTotalBytes,
             ),
           ),
+        ),
+        backgroundDecoration: BoxDecoration(
+          color: Colors.transparent,
         ),
       ),
     );

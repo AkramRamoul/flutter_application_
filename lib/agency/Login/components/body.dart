@@ -60,18 +60,6 @@ class _BodyState extends State<Body> {
               },
             ),
             SizedBox(height: size.height * 0.03),
-            AlreadyHaveAnAccountCheck(
-              press: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return SignUpScreen();
-                    },
-                  ),
-                );
-              },
-            ),
           ],
         ),
       ),
@@ -103,7 +91,7 @@ class _BodyState extends State<Body> {
 
     if (response.statusCode == 200) {
       var body = json.decode(response.body);
-      // _showMsg(response.body);
+      _showMsg(response.body);
 
       SharedPreferences localStorage = await SharedPreferences.getInstance();
       localStorage.setString('token', json.encode(body['token']));

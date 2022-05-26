@@ -1,5 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
-import 'package:real_estate_app/client/screens/home/home_screen.dart';
+import 'package:real_estate_app/helpers/Api.dart';
 
 class AgencyProfilePage extends StatefulWidget {
   @override
@@ -7,6 +9,13 @@ class AgencyProfilePage extends StatefulWidget {
 }
 
 class _AgencyProfilePageState extends State<AgencyProfilePage> {
+  var offers;
+  @override
+  void initState() {
+    super.initState();
+    _loadAdmins();
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -29,7 +38,7 @@ class _AgencyProfilePageState extends State<AgencyProfilePage> {
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: Text(
-                'User Name',
+                offers['email'],
                 style: TextStyle(color: Colors.black, fontSize: 20),
               ),
             ),
@@ -44,5 +53,19 @@ class _AgencyProfilePageState extends State<AgencyProfilePage> {
         ),
       ),
     );
+  }
+
+  _loadAdmins() async {
+    var response = await Api().getData('/admin');
+    if (response.statusCode == 200) {
+      setState(() {
+        // print(response.body);:
+        offers = json.decode(response.body);
+      });
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text('Error ' + response.statusCode + ': ' + response.body),
+      ));
+    }
   }
 }

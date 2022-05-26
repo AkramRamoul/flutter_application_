@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:real_estate_app/agency/screens/OfferDetailsView.dart';
 import 'package:real_estate_app/helpers/Api.dart';
-import 'AddOfferView.dart';
 
 class OffersListView extends StatefulWidget {
   @override

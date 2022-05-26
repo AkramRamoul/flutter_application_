@@ -22,6 +22,7 @@ class _AddOfferState extends State<AddOfferView> {
 
   var user_id = 1;
   var title;
+  var number;
   var price;
   var area;
   var bedrooms;
@@ -86,6 +87,14 @@ class _AddOfferState extends State<AddOfferView> {
                   icon: Icon(Icons.bathroom_outlined), labelText: 'bathrooms'),
               onChanged: (value) {
                 bathrooms = value;
+              },
+            ),
+            TextFormField(
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                  icon: Icon(Icons.phone), labelText: 'Phone Number'),
+              onChanged: (value) {
+                number = value;
               },
             ),
             DropdownButton(
@@ -242,6 +251,7 @@ class _AddOfferState extends State<AddOfferView> {
     data['price'] = price;
     data['area'] = area;
     data['user_id'] = user_id.toString();
+    data['number'] = number.toString();
     data['bedrooms'] = bedrooms;
     data['bathrooms'] = bathrooms;
     data['category_id'] = category_id.toString();
