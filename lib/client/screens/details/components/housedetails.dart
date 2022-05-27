@@ -3,10 +3,8 @@ import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 import 'package:real_estate_app/client/constants/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:real_estate_app/client/screens/details/components/bottom_buttons.dart';
 import 'package:real_estate_app/helpers/Api.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../../../constants/constants.dart';
 
 class housedetails extends StatefulWidget {
   @override
@@ -43,7 +41,10 @@ class _OfferDetailsState extends State<housedetails> {
             SizedBox(
               height: 20,
             ),
-            _buildGridView(),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0, 100, 0, 0),
+              child: _buildGridView(),
+            ),
             buildButtons(),
           ],
         ),
@@ -53,7 +54,7 @@ class _OfferDetailsState extends State<housedetails> {
 
   Widget _buildFormFields() {
     return Container(
-      margin: EdgeInsets.only(left: 20.0, right: 20.0, bottom: 100.0),
+      margin: EdgeInsets.only(left: 10.0, right: 20.0, bottom: 0.0),
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -62,8 +63,8 @@ class _OfferDetailsState extends State<housedetails> {
               height: 100,
             ),
             Padding(
-              padding:
-                  const EdgeInsets.only(left: appPadding, bottom: appPadding),
+              padding: const EdgeInsets.only(
+                  left: appPadding, bottom: appPadding / 3),
               child: Text(
                 offer['title'],
                 style: TextStyle(
@@ -207,7 +208,7 @@ class _OfferDetailsState extends State<housedetails> {
 
   Widget buildButtons() {
     Size size = MediaQuery.of(context).size;
-    String _phoneNumber = offer['number'];
+    final String _phoneNumber = offer['number'];
 
     return Padding(
       padding: const EdgeInsets.only(bottom: appPadding),
@@ -215,33 +216,10 @@ class _OfferDetailsState extends State<housedetails> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Container(
-            width: size.width * 0.4,
+            width: size.width * 0.35,
             height: 60,
             decoration: BoxDecoration(
-                color: darkBlue,
-                borderRadius: BorderRadius.circular(30),
-                boxShadow: [
-                  BoxShadow(
-                      color: darkBlue.withOpacity(0.6),
-                      offset: Offset(0, 10),
-                      blurRadius: 10)
-                ]),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                IconButton(
-                  icon: Icon(Icons.mail_rounded),
-                  color: white,
-                  onPressed: () {},
-                ),
-              ],
-            ),
-          ),
-          Container(
-            width: size.width * 0.4,
-            height: 60,
-            decoration: BoxDecoration(
-                color: darkBlue,
+                color: black,
                 borderRadius: BorderRadius.circular(30),
                 boxShadow: [
                   BoxShadow(
@@ -255,8 +233,41 @@ class _OfferDetailsState extends State<housedetails> {
                 IconButton(
                   icon: Icon(Icons.call_rounded),
                   color: white,
+                  iconSize: 35,
                   onPressed: () async {
-                    launch('tel:$_phoneNumber');
+                    final _call = 'tel:$_phoneNumber';
+                    if (await canLaunch(_call)) {
+                      await launch(_call);
+                    }
+                  },
+                ),
+              ],
+            ),
+          ),
+          Container(
+            width: size.width * 0.35,
+            height: 60,
+            decoration: BoxDecoration(
+                color: black,
+                borderRadius: BorderRadius.circular(30),
+                boxShadow: [
+                  BoxShadow(
+                      color: black.withOpacity(0.6),
+                      offset: Offset(0, 10),
+                      blurRadius: 10)
+                ]),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                IconButton(
+                  icon: Icon(Icons.mail_rounded),
+                  color: white,
+                  iconSize: 35,
+                  onPressed: () async {
+                    final _text = 'sms:$_phoneNumber';
+                    if (await canLaunch(_text)) {
+                      await launch(_text);
+                    }
                   },
                 ),
               ],
@@ -268,22 +279,21 @@ class _OfferDetailsState extends State<housedetails> {
   }
 
   Widget _buildGridView() {
+    Size size = MediaQuery.of(context).size;
     return Container(
-      width: MediaQuery.of(context).size.width,
+      width: size.width * 1.5,
       child: PhotoViewGallery.builder(
         scrollPhysics: const BouncingScrollPhysics(),
         builder: (BuildContext context, int index) {
           return PhotoViewGalleryPageOptions(
             imageProvider: NetworkImage(
                 Api().getOfferImageUrl(offer['images'][index]['id'])),
-            initialScale: PhotoViewComputedScale.contained * 0.8,
+            minScale: PhotoViewComputedScale.contained * 0.8,
           );
         },
         itemCount: offer['images'].length,
         loadingBuilder: (context, event) => Center(
           child: Container(
-            width: MediaQuery.of(context).size.width * 0.8,
-            height: 20.0,
             child: CircularProgressIndicator(
               value: event == null
                   ? 0

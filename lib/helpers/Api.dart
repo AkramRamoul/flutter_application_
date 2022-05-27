@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
+import 'SharedPreferencesManager.dart';
 
 class Api {
   final String _baseUrl = 'http://192.168.43.5:8000/api';
-  //if you are using android studio emulator, change localhost to 10.0.2.2
   var token;
 
   postData(data, apiUrl) async {
@@ -22,13 +22,13 @@ class Api {
 
   getData(apiUrl) async {
     var fullUrl = _baseUrl + apiUrl;
-    //token = await SharedPreferencesManager().getAuthToken();
+    token = await SharedPreferencesManager().getAuthToken();
     return await http.get(Uri.parse(fullUrl), headers: _setHeaders());
   }
 
   postDataWithImage(data, apiUrl, filepath) async {
     var fullUrl = _baseUrl + apiUrl;
-    //token = await SharedPreferencesManager().getAuthToken();
+    token = await SharedPreferencesManager().getAuthToken();
     Map<String, String> headers = {
       'Content-Type': 'multipart/form-data',
       'Accept': 'application/json',
@@ -43,7 +43,7 @@ class Api {
 
   postDataWithImages(data, apiUrl, List<XFile> files) async {
     var fullUrl = _baseUrl + apiUrl;
-    //token = await SharedPreferencesManager().getAuthToken();
+    token = await SharedPreferencesManager().getAuthToken();
     Map<String, String> headers = {
       'Content-Type': 'multipart/form-data',
       'Accept': 'application/json',

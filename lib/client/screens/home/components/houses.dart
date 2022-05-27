@@ -22,13 +22,15 @@ class _HousesState extends State<Houses> {
   }
 
   Widget build(BuildContext context) {
-    return Expanded(
-      child: ListView.builder(
-        physics: BouncingScrollPhysics(),
-        itemCount: _offers.length,
-        itemBuilder: _buildHouse,
-      ),
-    );
+    return new WillPopScope(
+        child: Expanded(
+          child: ListView.builder(
+            physics: BouncingScrollPhysics(),
+            itemCount: _offers.length,
+            itemBuilder: _buildHouse,
+          ),
+        ),
+        onWillPop: () async => false);
   }
 
   Widget _buildHouse(BuildContext context, int index) {

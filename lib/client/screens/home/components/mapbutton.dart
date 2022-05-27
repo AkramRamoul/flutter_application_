@@ -10,16 +10,13 @@ class MapButton extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: appPadding),
       child: Container(
-        width: size.width * 0.4,
+        width: size.width * 0.3,
         height: 60,
         decoration: BoxDecoration(
-            color: darkBlue,
+            color: black,
             borderRadius: BorderRadius.circular(30),
             boxShadow: [
-              BoxShadow(
-                  color: darkBlue.withOpacity(0.6),
-                  offset: Offset(0, 10),
-                  blurRadius: 10)
+              BoxShadow(color: black, offset: Offset(0, 10), blurRadius: 10)
             ]),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -30,7 +27,8 @@ class MapButton extends StatelessWidget {
                     MaterialPageRoute(builder: (context) => MapView()));
               },
               icon: Icon(
-                (Icons.map_outlined),
+                (Icons.map_rounded),
+                size: 30,
                 color: white,
               ),
             ),

@@ -38,7 +38,7 @@ class _AgencyProfilePageState extends State<AgencyProfilePage> {
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: Text(
-                offers['email'],
+                'username',
                 style: TextStyle(color: Colors.black, fontSize: 20),
               ),
             ),
