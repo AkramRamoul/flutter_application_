@@ -17,7 +17,7 @@ class HomeScreen extends StatelessWidget {
               Houses(),
             ],
           ),
-          MapButton(),
+          // MapButton(),
         ],
       ),
     );

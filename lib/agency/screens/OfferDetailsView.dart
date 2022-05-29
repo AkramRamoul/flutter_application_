@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:photo_view/photo_view.dart';
+import 'package:photo_view/photo_view_gallery.dart';
 import 'package:real_estate_app/helpers/Api.dart';
 
 import '../../client/constants/constants.dart';
@@ -25,13 +27,25 @@ class _OfferDetailsState extends State<OfferDetailsView> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: EdgeInsets.fromLTRB(0, 80, 0, 0),
+        padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
         child: Stack(
+          alignment: Alignment.bottomCenter,
           children: <Widget>[
-            Align(
-              alignment: Alignment.topCenter,
-              child: offer != null ? _buildFormFields() : Text('Loading...'),
-            )
+            Column(
+              children: [
+                Align(
+                  child:
+                      offer != null ? _buildFormFields() : Text('Loading...'),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0, 100, 0, 0),
+              child: offer != null ? _buildGridView() : Text('Loading...'),
+            ),
           ],
         ),
       ),
@@ -40,14 +54,17 @@ class _OfferDetailsState extends State<OfferDetailsView> {
 
   Widget _buildFormFields() {
     return Container(
-      margin: EdgeInsets.only(left: 20.0, right: 20.0, bottom: 80.0),
+      margin: EdgeInsets.only(left: 10.0, right: 20.0, bottom: 0.0),
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
+            SizedBox(
+              height: 100,
+            ),
             Padding(
-              padding:
-                  const EdgeInsets.only(left: appPadding, bottom: appPadding),
+              padding: const EdgeInsets.only(
+                  left: appPadding, bottom: appPadding / 3),
               child: Text(
                 offer['title'],
                 style: TextStyle(
@@ -55,10 +72,6 @@ class _OfferDetailsState extends State<OfferDetailsView> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-            ),
-            _buildGridView(),
-            SizedBox(
-              height: 50,
             ),
             Container(
               height: 130,
@@ -71,36 +84,27 @@ class _OfferDetailsState extends State<OfferDetailsView> {
                       left: appPadding,
                       bottom: appPadding,
                     ),
-                    child: Container(
-                      width: 100,
-                      decoration: BoxDecoration(
-                          color: white,
-                          borderRadius: BorderRadius.circular(20),
-                          border: Border.all(
-                            color: black.withOpacity(0.4),
-                          )),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            offer['price'].toString(),
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          offer['price'].toString(),
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
                           ),
-                          SizedBox(
-                            height: 10,
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          'Dinars',
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600,
                           ),
-                          Text(
-                            'Dinars',
-                            style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                   Padding(
@@ -108,36 +112,27 @@ class _OfferDetailsState extends State<OfferDetailsView> {
                       left: appPadding,
                       bottom: appPadding,
                     ),
-                    child: Container(
-                      width: 100,
-                      decoration: BoxDecoration(
-                          color: white,
-                          borderRadius: BorderRadius.circular(20),
-                          border: Border.all(
-                            color: black.withOpacity(0.4),
-                          )),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            offer['area'].toString(),
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          offer['area'].toString(),
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
                           ),
-                          SizedBox(
-                            height: 10,
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          'm²',
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600,
                           ),
-                          Text(
-                            'm²',
-                            style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                   Padding(
@@ -145,36 +140,27 @@ class _OfferDetailsState extends State<OfferDetailsView> {
                       left: appPadding,
                       bottom: appPadding,
                     ),
-                    child: Container(
-                      width: 100,
-                      decoration: BoxDecoration(
-                          color: white,
-                          borderRadius: BorderRadius.circular(20),
-                          border: Border.all(
-                            color: black.withOpacity(0.4),
-                          )),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            offer['bedrooms'].toString(),
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          offer['bedrooms'].toString(),
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
                           ),
-                          SizedBox(
-                            height: 10,
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          'Bedrooms',
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600,
                           ),
-                          Text(
-                            'Bedrooms',
-                            style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                   Padding(
@@ -182,36 +168,27 @@ class _OfferDetailsState extends State<OfferDetailsView> {
                       left: appPadding,
                       bottom: appPadding,
                     ),
-                    child: Container(
-                      width: 100,
-                      decoration: BoxDecoration(
-                          color: white,
-                          borderRadius: BorderRadius.circular(20),
-                          border: Border.all(
-                            color: black.withOpacity(0.4),
-                          )),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            offer['bathrooms'].toString(),
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          offer['bathrooms'].toString(),
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
                           ),
-                          SizedBox(
-                            height: 10,
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          'Bathrooms',
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600,
                           ),
-                          Text(
-                            'Bathrooms',
-                            style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                   Padding(
@@ -221,13 +198,6 @@ class _OfferDetailsState extends State<OfferDetailsView> {
                     ),
                   ),
                 ],
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(
-                left: appPadding,
-                right: appPadding,
-                bottom: appPadding * 4,
               ),
             ),
           ],
@@ -245,24 +215,32 @@ class _OfferDetailsState extends State<OfferDetailsView> {
   // }
 
   Widget _buildGridView() {
-    return GridView.count(
-      shrinkWrap: true,
-      crossAxisCount: 3,
-      childAspectRatio: 1,
-      children: List.generate(offer['images'].length, (index) {
-        return Card(
-          clipBehavior: Clip.antiAlias,
-          child: Stack(
-            children: <Widget>[
-              Image.network(
-                Api().getOfferImageUrl(offer['images'][index]['id']),
-                width: 300,
-                height: 300,
-              ),
-            ],
+    Size size = MediaQuery.of(context).size;
+    return Container(
+      width: size.width * 1.5,
+      child: PhotoViewGallery.builder(
+        scrollPhysics: const BouncingScrollPhysics(),
+        builder: (BuildContext context, int index) {
+          return PhotoViewGalleryPageOptions(
+            imageProvider: NetworkImage(
+                Api().getOfferImageUrl(offer['images'][index]['id'])),
+            minScale: PhotoViewComputedScale.contained * 0.8,
+          );
+        },
+        itemCount: offer['images'].length,
+        loadingBuilder: (context, event) => Center(
+          child: Container(
+            child: CircularProgressIndicator(
+              value: event == null
+                  ? 0
+                  : event.cumulativeBytesLoaded / event.expectedTotalBytes,
+            ),
           ),
-        );
-      }),
+        ),
+        backgroundDecoration: BoxDecoration(
+          color: Colors.transparent,
+        ),
+      ),
     );
   }
 

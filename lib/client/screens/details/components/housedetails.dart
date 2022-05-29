@@ -43,7 +43,7 @@ class _OfferDetailsState extends State<housedetails> {
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(0, 100, 0, 0),
-              child: _buildGridView(),
+              child: offer != null ? _buildGridView() : Text('Loading...'),
             ),
             buildButtons(),
           ],
@@ -62,16 +62,20 @@ class _OfferDetailsState extends State<housedetails> {
             SizedBox(
               height: 100,
             ),
-            Padding(
-              padding: const EdgeInsets.only(
-                  left: appPadding, bottom: appPadding / 3),
-              child: Text(
-                offer['title'],
-                style: TextStyle(
-                  fontSize: 35,
-                  fontWeight: FontWeight.bold,
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(
+                      left: appPadding, bottom: appPadding / 3),
+                  child: Text(
+                    offer['title'],
+                    style: TextStyle(
+                      fontSize: 35,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
-              ),
+              ],
             ),
             Container(
               height: 130,

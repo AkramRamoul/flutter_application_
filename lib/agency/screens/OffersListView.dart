@@ -79,7 +79,8 @@ class _OffersListState extends State<OffersListView> {
               FlatButton(
                 textColor: const Color(0xFF6200EE),
                 onPressed: () {
-                  // Perform some action
+                  int id = _offers[index]['id'];
+                  deleteData(id);
                 },
                 child: const Text('Delete Offer'),
               ),
@@ -88,6 +89,19 @@ class _OffersListState extends State<OffersListView> {
         ],
       ),
     );
+  }
+
+  deleteData(id) async {
+    var response = await Api().deleteData('/offer/$id');
+    if (response.statusCode == 200) {
+      setState(() {
+        print('deleted');
+      });
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text('Error ' + response.statusCode),
+      ));
+    }
   }
 
   _loadOffers() async {

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:real_estate_app/agency/Login/Agency_login_screen.dart';
 import 'package:real_estate_app/client/constants/constants.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:real_estate_app/client/screens/home/home_screen.dart';
 import 'package:real_estate_app/loading.dart';
 
 void main() {

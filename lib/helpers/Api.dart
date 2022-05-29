@@ -26,6 +26,12 @@ class Api {
     return await http.get(Uri.parse(fullUrl), headers: _setHeaders());
   }
 
+  deleteData(id) async {
+    var url = _baseUrl + '/offers/$id';
+    token = await SharedPreferencesManager().getAuthToken();
+    return await http.delete(Uri.parse(url), headers: _setHeaders());
+  }
+
   postDataWithImage(data, apiUrl, filepath) async {
     var fullUrl = _baseUrl + apiUrl;
     token = await SharedPreferencesManager().getAuthToken();
