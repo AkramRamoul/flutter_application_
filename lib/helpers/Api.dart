@@ -1,6 +1,8 @@
 import 'dart:convert';
+import 'dart:html';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
+import 'package:real_estate_app/client/screens/Login/ecrans/Signup/components/body.dart';
 import 'SharedPreferencesManager.dart';
 
 class Api {
@@ -27,7 +29,7 @@ class Api {
   }
 
   deleteData(id) async {
-    var url = _baseUrl + '/offers/$id';
+    var url = _baseUrl + '/offer/$id';
     token = await SharedPreferencesManager().getAuthToken();
     return await http.delete(Uri.parse(url), headers: _setHeaders());
   }

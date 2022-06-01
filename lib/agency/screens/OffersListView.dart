@@ -92,7 +92,7 @@ class _OffersListState extends State<OffersListView> {
   }
 
   deleteData(id) async {
-    var response = await Api().deleteData('/offer/$id');
+    var response = await Api().deleteData('$id');
     if (response.statusCode == 200) {
       setState(() {
         print('deleted');

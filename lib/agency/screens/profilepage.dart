@@ -1,23 +1,35 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:real_estate_app/helpers/Api.dart';
 
 class AgencyProfilePage extends StatefulWidget {
   @override
-  State<AgencyProfilePage> createState() => _AgencyProfilePageState();
+  State<StatefulWidget> createState() {
+    return _OffersListState();
+  }
 }
 
-class _AgencyProfilePageState extends State<AgencyProfilePage> {
-  var offers;
+class _OffersListState extends State<AgencyProfilePage> {
+  var _offers = [];
   @override
   void initState() {
     super.initState();
-    _loadAdmins();
+    _loadOffers();
   }
 
   @override
   Widget build(BuildContext context) {
+    return Scaffold(
+      body: Column(children: [
+        Expanded(
+            child: ListView.builder(
+          itemBuilder: _buildOfferItem,
+        ))
+      ]),
+    );
+  }
+
+  Widget _buildOfferItem(BuildContext context, int index) {
     return DefaultTabController(
       length: 1,
       child: Scaffold(
@@ -38,7 +50,7 @@ class _AgencyProfilePageState extends State<AgencyProfilePage> {
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: Text(
-                'username',
+                _offers[index]['email'],
                 style: TextStyle(color: Colors.black, fontSize: 20),
               ),
             ),
@@ -55,12 +67,25 @@ class _AgencyProfilePageState extends State<AgencyProfilePage> {
     );
   }
 
-  _loadAdmins() async {
+  deleteData(id) async {
+    var response = await Api().deleteData('$id');
+    if (response.statusCode == 200) {
+      setState(() {
+        print('deleted');
+      });
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text('Error ' + response.statusCode),
+      ));
+    }
+  }
+
+  _loadOffers() async {
     var response = await Api().getData('/admin');
     if (response.statusCode == 200) {
       setState(() {
         // print(response.body);:
-        offers = json.decode(response.body);
+        _offers = json.decode(response.body);
       });
     } else {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
