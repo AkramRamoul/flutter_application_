@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:real_estate_app/helpers/Api.dart';
 
@@ -10,9 +9,7 @@ class AgencyProfilePage extends StatefulWidget {
 }
 
 class _OffersListState extends State<AgencyProfilePage> {
-  @override
-  
-  }
+  var _offers = [];
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +44,7 @@ class _OffersListState extends State<AgencyProfilePage> {
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: Text(
-                'username'
+                _offers[index]['email'],
                 style: TextStyle(color: Colors.black, fontSize: 20),
               ),
             ),
@@ -64,6 +61,16 @@ class _OffersListState extends State<AgencyProfilePage> {
     );
   }
 
-  
-  
-
+  deleteData(id) async {
+    var response = await Api().deleteData('$id');
+    if (response.statusCode == 200) {
+      setState(() {
+        print('deleted');
+      });
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text('Error ' + response.statusCode),
+      ));
+    }
+  }
+}
