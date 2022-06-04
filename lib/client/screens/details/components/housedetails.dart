@@ -45,7 +45,7 @@ class _OfferDetailsState extends State<housedetails> {
               padding: const EdgeInsets.fromLTRB(0, 100, 0, 0),
               child: offer != null ? _buildGridView() : Text('Loading...'),
             ),
-            buildButtons(),
+            offer != null ? buildButtons() : Text('Loading...'),
           ],
         ),
       ),
@@ -54,7 +54,7 @@ class _OfferDetailsState extends State<housedetails> {
 
   Widget _buildFormFields() {
     return Container(
-      margin: EdgeInsets.only(left: 10.0, right: 20.0, bottom: 0.0),
+      margin: EdgeInsets.only(left: 3.0, right: 0.0, bottom: 0.0),
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -66,7 +66,7 @@ class _OfferDetailsState extends State<housedetails> {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(
-                      left: appPadding, bottom: appPadding / 3),
+                      left: appPadding / 2, bottom: appPadding / 3),
                   child: Text(
                     offer['title'],
                     style: TextStyle(
@@ -85,7 +85,7 @@ class _OfferDetailsState extends State<housedetails> {
                 children: [
                   Padding(
                     padding: EdgeInsets.only(
-                      left: appPadding,
+                      left: appPadding / 2,
                       bottom: appPadding,
                     ),
                     child: Column(

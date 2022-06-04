@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:real_estate_app/agency/screens/EditOffer.dart';
 import 'package:real_estate_app/agency/screens/OfferDetailsView.dart';
 import 'package:real_estate_app/helpers/Api.dart';
 
@@ -83,6 +84,17 @@ class _OffersListState extends State<OffersListView> {
                   deleteData(id);
                 },
                 child: const Text('Delete Offer'),
+              ),
+              FlatButton(
+                textColor: const Color(0xFF6200EE),
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              EditOffer(offer_id: _offers[index]['id'])));
+                },
+                child: const Text('Edit Offer'),
               ),
             ],
           ),

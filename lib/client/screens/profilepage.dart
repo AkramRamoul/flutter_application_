@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:real_estate_app/client/screens/home/home_screen.dart';
 import 'package:real_estate_app/firstscreen/FIRSTSCREEN.dart';
 import 'package:real_estate_app/helpers/Api.dart';
+import 'package:real_estate_app/helpers/SharedPreferencesManager.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserProfilePage extends StatefulWidget {
@@ -12,15 +13,28 @@ class UserProfilePage extends StatefulWidget {
 }
 
 class _UserProfilePageState extends State<UserProfilePage> {
-  @override
-  var _offers = [];
-  bool isFav = false;
+  var loginText = '';
+  var sharedPreferencesManager = new SharedPreferencesManager();
+  _checkLoggedInUser() async {
+    var token = await sharedPreferencesManager.getAuthToken();
+    if (token != null) {
+      var user = await sharedPreferencesManager.getCurrentUser();
+      setState(() {
+        loginText = 'Welcome ' + user['email'];
+      });
+    } else
+      setState(() {
+        loginText = 'No user logged in';
+      });
+  }
+
   @override
   void initState() {
     super.initState();
-    _loadOffers();
+    WidgetsBinding.instance.addPostFrameCallback((_) => _checkLoggedInUser());
   }
 
+  @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 1,
@@ -75,7 +89,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: Text(
-                'User Name',
+                loginText,
                 style: TextStyle(color: Colors.black, fontSize: 20),
               ),
             ),
@@ -112,20 +126,6 @@ class _UserProfilePageState extends State<UserProfilePage> {
         ),
       ),
     );
-  }
-
-  _loadOffers() async {
-    var response = await Api().getData('/user');
-    if (response.statusCode == 200) {
-      setState(() {
-        print(response.body);
-        _offers = json.decode(response.body);
-      });
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text('Error ' + response.statusCode + ': ' + response.body),
-      ));
-    }
   }
 }
 

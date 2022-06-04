@@ -1,8 +1,6 @@
 import 'dart:convert';
-import 'dart:html';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
-import 'package:real_estate_app/client/screens/Login/ecrans/Signup/components/body.dart';
 import 'SharedPreferencesManager.dart';
 
 class Api {
@@ -26,6 +24,19 @@ class Api {
     var fullUrl = _baseUrl + apiUrl;
     token = await SharedPreferencesManager().getAuthToken();
     return await http.get(Uri.parse(fullUrl), headers: _setHeaders());
+  }
+
+  getDataimage(id) async {
+    var fullUrl = _baseUrl + '/offer/$id';
+    token = await SharedPreferencesManager().getAuthToken();
+    return await http.get(Uri.parse(fullUrl), headers: _setHeaders());
+  }
+
+  editData(data, id) async {
+    var fullUrl = _baseUrl + '/offer/$id';
+    token = await SharedPreferencesManager().getAuthToken();
+    return await http.put(Uri.parse(fullUrl),
+        body: jsonEncode(data), headers: _setHeaders());
   }
 
   deleteData(id) async {

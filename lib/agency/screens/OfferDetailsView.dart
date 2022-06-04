@@ -54,7 +54,7 @@ class _OfferDetailsState extends State<OfferDetailsView> {
 
   Widget _buildFormFields() {
     return Container(
-      margin: EdgeInsets.only(left: 10.0, right: 20.0, bottom: 0.0),
+      margin: EdgeInsets.only(left: 0.0, right: 5.0, bottom: 0.0),
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,

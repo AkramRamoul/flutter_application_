@@ -13,6 +13,7 @@ class Houses extends StatefulWidget {
 class _HousesState extends State<Houses> {
   @override
   var _offers = [];
+  var url;
   bool isFav = false;
 
   @override
@@ -51,6 +52,8 @@ class _HousesState extends State<Houses> {
                     borderRadius: BorderRadius.circular(10),
                     child: Image.asset(
                       'assets/images/house1.jpeg',
+
+                      // Api().getOfferImageUrl(_offers[index]['images'][1]['id']),
                       fit: BoxFit.cover,
                       height: 180,
                       width: 600,
@@ -121,6 +124,7 @@ class _HousesState extends State<Houses> {
 
   _loadOffers() async {
     var response = await Api().getData('/offer');
+
     if (response.statusCode == 200) {
       setState(() {
         print(response.body);
