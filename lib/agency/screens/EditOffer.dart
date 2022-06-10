@@ -189,6 +189,7 @@ class _OfferDetailsState extends State<EditOffer> {
     // var response = await Api().postData(data, '/offer');
 
     if (response.statusCode == 200) {
+      _showMsg('Offer Edited');
       Navigator.pop(context);
     } else {
       _showMsg('Error ${response.statusCode}');

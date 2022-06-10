@@ -99,7 +99,7 @@ class _BodyState extends State<Body> {
 
     if (response.statusCode == 201) {
       var body = json.decode(response.body);
-      _showMsg(response.body);
+      // _showMsg(response.body);
 
       SharedPreferences localStorage = await SharedPreferences.getInstance();
       localStorage.setString('token', json.encode(body['token']));

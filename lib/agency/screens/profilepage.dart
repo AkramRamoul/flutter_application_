@@ -9,8 +9,6 @@ class AgencyProfilePage extends StatefulWidget {
 }
 
 class _OffersListState extends State<AgencyProfilePage> {
-  var _offers = [];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,7 +42,7 @@ class _OffersListState extends State<AgencyProfilePage> {
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: Text(
-                _offers[index]['email'],
+                'username',
                 style: TextStyle(color: Colors.black, fontSize: 20),
               ),
             ),
@@ -59,18 +57,5 @@ class _OffersListState extends State<AgencyProfilePage> {
         ),
       ),
     );
-  }
-
-  deleteData(id) async {
-    var response = await Api().deleteData('$id');
-    if (response.statusCode == 200) {
-      setState(() {
-        print('deleted');
-      });
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text('Error ' + response.statusCode),
-      ));
-    }
   }
 }

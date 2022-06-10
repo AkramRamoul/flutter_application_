@@ -266,6 +266,7 @@ class _AddOfferState extends State<AddOfferView> {
 
     if (response.statusCode == 201) {
       Navigator.pop(context);
+      _showMsg('offer created');
     } else {
       _showMsg('Error ${response.statusCode}');
     }
