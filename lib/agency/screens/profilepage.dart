@@ -12,50 +12,56 @@ class _OffersListState extends State<AgencyProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(children: [
-        Expanded(
-            child: ListView.builder(
-          itemBuilder: _buildOfferItem,
-        ))
-      ]),
-    );
-  }
-
-  Widget _buildOfferItem(BuildContext context, int index) {
-    return DefaultTabController(
-      length: 1,
-      child: Scaffold(
-        backgroundColor: Colors.white,
         body: Column(
+      children: [
+        // profile photo
+        Container(
+          height: 120,
+          width: 120,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: Colors.grey[200],
+          ),
+        ),
+
+        // username
+        Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Text(
+            'Username',
+            style: TextStyle(color: Colors.black, fontSize: 20),
+          ),
+        ),
+        SizedBox(height: 15),
+
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // profile photo
             Container(
-              height: 120,
-              width: 120,
+              padding: EdgeInsets.symmetric(vertical: 15, horizontal: 40),
+              child: Text('Edit profile',
+                  style: TextStyle(color: Colors.black, fontSize: 20)),
               decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.grey[200],
-              ),
+                  border: Border.all(color: Colors.grey.shade300),
+                  borderRadius: BorderRadius.circular(5)),
             ),
-
-            // username
             Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Text(
-                'username',
-                style: TextStyle(color: Colors.black, fontSize: 20),
+              padding: const EdgeInsets.symmetric(horizontal: 4.0),
+              child: Container(
+                padding: EdgeInsets.all(15),
+                child: Icon(
+                  Icons.camera_alt,
+                  color: Colors.grey[800],
+                ),
+                decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey.shade300),
+                    borderRadius: BorderRadius.circular(5)),
               ),
-            ),
-            SizedBox(height: 15),
-
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [],
             ),
           ],
         ),
-      ),
-    );
+        SizedBox(height: 15),
+      ],
+    ));
   }
 }
